@@ -1,15 +1,16 @@
 `timescale 1ns / 1ps
 /*
  Devices frequency of input clk by 2*(divide+1).
- (freq clk_divided) = (freq clk)/(2*(divide+1))
+ (freq   clk_divided) = (freq   clk) / (2*(divide+1))
+ (period clk_divided) = (period clk) * (2*(divide+1))
 
  Examples:
- Input | Divide | Output
- ------+--------+-------
-  1kHz |      0 |  500Hz
-  1kHz |      1 |  250Hz
-  1kHz |      2 |  167Hz
-  1kHz |      4 |  100Hz
+     Input | Divide | Output
+ ----------+--------+-------
+  1kHz/1mS |      0 |  500Hz/2mS
+  1kHz/1mS |      1 |  250Hz/4mS
+  1kHz/1mS |      2 |  167Hz/6mS
+  1kHz/1mS |      4 |  100Hz/10mS
 */
 
 module clock_divider(/*AUTOARG*/
@@ -28,11 +29,8 @@ module clock_divider(/*AUTOARG*/
 
    always_ff @(posedge clk) begin
       if (rst) begin
-         /*AUTORESET*/
-         // Beginning of autoreset for uninitialized flops
-         clk_divided <= 1'h0;
-         counter <= {N{1'b0}};
-         // End of automatics
+         clk_divided <= 0;
+         counter     <= 0;
       end
       else begin
          if (counter >= divide) begin // Ignore last bit
