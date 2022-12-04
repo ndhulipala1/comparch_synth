@@ -38,10 +38,10 @@ input wire i2c_transaction_t mode; // See i2c_types.sv, 0 is WRITE and 1 is READ
 output logic i_ready; // ready/valid handshake signals
 input wire i_valid;
 input wire [6:0] i_addr; // the address of the secondary device.
-input wire [7:0] i_data; // data to be sent on a WRITE opearation
+input wire [11:0] i_data; // data to be sent on a WRITE opearation
 input wire o_ready; // unused (for now)
 output logic o_valid; // high when data is valid. Should stay high until a new i_valid starts a new transaction.
-output logic [7:0] o_data; // the result of a read transaction (can be x's on a write).
+output logic [11:0] o_data; // the result of a read transaction (can be x's on a write).
 
 // Main FSM logic
 i2c_state_t state; // see i2c_types for the canonical states.

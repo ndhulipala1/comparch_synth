@@ -3,7 +3,7 @@
 
 // Based on the i2c Specification
 typedef enum logic {
-  WRITE_8BIT_REGISTER = 0, READ_8BIT = 1
+  WRITE_12BIT_REGISTER = 0, READ_12BIT = 1
 } i2c_transaction_t;
 
 // Main FSM logic
