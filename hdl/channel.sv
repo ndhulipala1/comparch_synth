@@ -10,7 +10,7 @@ module channel (/*AUTOARG*/
    // These parameters are used as constants, not to parameterize
    // instantiations
    parameter max_freq = 20000;
-   input wire [$clog2(20000)-1:0] pitch;
+   input wire [$clog2(max_freq)-1:0] pitch;
    input wire                     clk, ena;
    input wire [1:0]               waveform;
    output logic [10:0]            out; // 11 bit output as DAC is 12 bits.
