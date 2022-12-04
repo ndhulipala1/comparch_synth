@@ -1,0 +1,35 @@
+[*]
+[*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
+[*] Sun Dec  4 19:55:24 2022
+[*]
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/clock_divider.fst"
+[dumpfile_mtime] "Sun Dec  4 19:54:31 2022"
+[dumpfile_size] 693
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_clock_divider.gtkw"
+[timestart] 0
+[size] 1884 980
+[pos] -956 -1
+*-15.000000 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_clock_divider_generator.
+[sst_width] 273
+[signals_width] 168
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@200
+-Inputs
+@28
+test_clock_divider_generator.UUT.rst
+@23
+test_clock_divider_generator.UUT.divide[3:0]
+@28
+test_clock_divider_generator.UUT.clk
+@200
+-Outputs
+@28
+test_clock_divider_generator.UUT.clk_divided
+@200
+-Internal
+@22
+test_clock_divider_generator.UUT.counter[3:0]
+[pattern_trace] 1
+[pattern_trace] 0

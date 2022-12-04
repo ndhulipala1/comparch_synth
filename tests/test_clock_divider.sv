@@ -28,6 +28,9 @@ module test_clock_divider_generator;
       
       @(negedge clk);
 
+      divide = 1;
+      repeat (CYCLES) @(posedge clk);
+
       divide = 2;
       repeat (CYCLES) @(posedge clk);
 
