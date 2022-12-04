@@ -17,6 +17,9 @@ MAIN_MEMORIES=memories/ili9341_init.memh
 test_sq_wave_generator: tests/test_sq_wave_generator.sv hdl/sq_wave_generator.sv
 	${IVERILOG} $^ -o test_sq_wave_generator.bin && ${VVP} test_sq_wave_generator.bin ${VVP_POST}
 
+test_clock_divider: tests/test_clock_divider.sv hdl/clock_divider.sv
+	${IVERILOG} $^ -o test_clock_divider.bin && ${VVP} test_clock_divider.bin ${VVP_POST}
+
 test_pwm: tests/test_pwm.sv hdl/pulse_generator.sv hdl/pwm.sv
 	@echo "This might take a while, we're testing a lot of clock cycles!"
 	${IVERILOG} $^ -o test_pwm.bin && ${VVP} test_pwm.bin ${VVP_POST}
