@@ -26,6 +26,10 @@ test_pwm: tests/test_pwm.sv hdl/pulse_generator.sv hdl/pwm.sv
 
 test_triangle_generator: tests/test_triangle_generator.sv hdl/triangle_generator.sv
 	${IVERILOG} $^ -o test_triangle_generator.bin && ${VVP} test_triangle_generator.bin ${VVP_POST}
+
+waves_clock_divider: test_clock_divider
+	gtkwave clock_divider.fst -a tests/test_clock_divider.gtkw
+
 waves_triangle_generator: test_triangle_generator
 	gtkwave triangle_generator.fst -a tests/triangle_generator.gtkw
 
