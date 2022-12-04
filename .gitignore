@@ -1,3 +1,18 @@
+# Files from verilog synthesis and simulation
+*.bin
+*.vcd
+*.fst
+vivado*.log
+*.jou
+vivado*.str
+*.log
+*.checkpoint
+*.bit
+*.html
+*.xml
+*.out
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
