@@ -2,7 +2,7 @@
   Outputs a pulse generator with a period of "ticks".
   out should go high for one cycle ever "ticks" clocks.
 */
-module square_wave_generator(clk, rst, ena, pitch_ticks, out);
+module sq_wave_generator(clk, rst, ena, pitch_ticks, out);
 
 parameter N = 8;
 input wire clk, rst, ena;
