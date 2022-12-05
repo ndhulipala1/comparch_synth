@@ -70,7 +70,7 @@ module test_channel;
       repeat (NOTE_CYCLES) @(posedge clk);
 
       // Test with A880
-      pitch = A440;
+      pitch = A880;
 
       // square
       waveform = 0;
