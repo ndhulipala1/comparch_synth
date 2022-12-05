@@ -17,21 +17,32 @@ MAIN_MEMORIES=memories/ili9341_init.memh
 test_sq_wave_generator: tests/test_sq_wave_generator.sv hdl/sq_wave_generator.sv
 	${IVERILOG} $^ -o test_sq_wave_generator.bin && ${VVP} test_sq_wave_generator.bin ${VVP_POST}
 
+test_tri_wave_generator: tests/test_tri_wave_generator.sv hdl/tri_wave_generator.sv
+	${IVERILOG} $^ -o test_tri_wave_generator.bin && ${VVP} test_tri_wave_generator.bin ${VVP_POST}
+
+test_sine_wave_generator: tests/test_sine_wave_generator.sv hdl/sine_wave_generator.sv
+	${IVERILOG} $^ -o test_sine_wave_generator.bin && ${VVP} test_sine_wave_generator.bin ${VVP_POST}
+
+test_saw_wave_generator: tests/test_saw_wave_generator.sv hdl/saw_wave_generator.sv
+	${IVERILOG} $^ -o test_saw_wave_generator.bin && ${VVP} test_saw_wave_generator.bin ${VVP_POST}
+
 test_clock_divider: tests/test_clock_divider.sv hdl/clock_divider.sv
 	${IVERILOG} $^ -o test_clock_divider.bin && ${VVP} test_clock_divider.bin ${VVP_POST}
-
-test_pwm: tests/test_pwm.sv hdl/pulse_generator.sv hdl/pwm.sv
-	@echo "This might take a while, we're testing a lot of clock cycles!"
-	${IVERILOG} $^ -o test_pwm.bin && ${VVP} test_pwm.bin ${VVP_POST}
-
-test_triangle_generator: tests/test_triangle_generator.sv hdl/triangle_generator.sv
-	${IVERILOG} $^ -o test_triangle_generator.bin && ${VVP} test_triangle_generator.bin ${VVP_POST}
 
 waves_clock_divider: test_clock_divider
 	gtkwave clock_divider.fst -a tests/test_clock_divider.gtkw
 
-waves_triangle_generator: test_triangle_generator
-	gtkwave triangle_generator.fst -a tests/triangle_generator.gtkw
+waves_sq_wave_generator: test_sq_wave_generator
+	gtkwave sq_wave_generator.fst -a tests/test_sq_wave_generator.gtkw
+
+waves_tri_wave_generator: test_tri_wave_generator
+	gtkwave tri_wave_generator.fst -a tests/test_tri_wave_generator.gtkw
+
+waves_sine_wave_generator: test_sine_wave_generator
+	gtkwave sine_wave_generator.fst -a tests/test_sine_wave_generator.gtkw
+
+waves_saw_wave_generator: test_saw_wave_generator
+	gtkwave saw_wave_generator.fst -a tests/test_saw_wave_generator.gtkw
 
 test_spi_controller : tests/test_spi_controller.sv hdl/spi_controller.sv hdl/spi_types.sv
 	${IVERILOG} $^ -o test_spi_controller.bin && ${VVP} test_spi_controller.bin ${VVP_POST}
