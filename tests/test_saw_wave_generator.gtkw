@@ -1,0 +1,23 @@
+[*]
+[*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
+[*] Mon Dec  5 00:20:26 2022
+[*]
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/saw_wave_generator.fst"
+[dumpfile_mtime] "Mon Dec  5 00:19:53 2022"
+[dumpfile_size] 1486
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_saw_wave_generator.gtkw"
+[timestart] 15300
+[size] 1884 980
+[pos] -956 -1
+*-16.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_saw_wave_generator.
+[sst_width] 273
+[signals_width] 118
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@8022
+test_saw_wave_generator.UUT.period[7:0]
+@8023
+test_saw_wave_generator.UUT.saw[10:0]
+[pattern_trace] 1
+[pattern_trace] 0

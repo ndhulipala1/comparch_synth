@@ -1,0 +1,23 @@
+[*]
+[*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
+[*] Mon Dec  5 00:17:26 2022
+[*]
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/tri_wave_generator.fst"
+[dumpfile_mtime] "Mon Dec  5 00:16:54 2022"
+[dumpfile_size] 1444
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_tri_wave_generator.gtkw"
+[timestart] 19200
+[size] 1884 980
+[pos] -956 -1
+*-16.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_tri_wave_generator.
+[sst_width] 273
+[signals_width] 142
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@8022
+test_tri_wave_generator.UUT.period[7:0]
+@8023
+test_tri_wave_generator.UUT.triangle[10:0]
+[pattern_trace] 1
+[pattern_trace] 0
