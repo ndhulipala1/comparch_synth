@@ -3,20 +3,26 @@
 
 /*
  Channel for synthesizer.
+
  Output frequency is clk/(2*256*(pitch+1)), where clk is 12MHz.
+
+ To find correct `pitch` parameter for frequency:
+    pitch(freq) = (clk/(2*256*freq)) - 1
 */
 
 module channel (/*AUTOARG*/
    // Outputs
    out,
    // Inputs
-   clk, ena, pitch, rst, waveform
+   clk, ena, pitch, rst, rst_div, waveform
    );
    output logic [10:0] out; // 11 bit output as DAC is 12 bits.
 
    input wire [11:0] pitch;
    input wire [1:0]  waveform;
-   input wire        clk, rst, ena;
+   input wire        clk, ena, rst,
+                     rst_div; // div_rst is to reset signals that use the
+                              // divided clock.
 
    // Internal counters
    logic [7:0] period; // 8bit counter to send to wave generators, the period
@@ -30,7 +36,7 @@ module channel (/*AUTOARG*/
                                         .rst         (rst),
                                         .divide      (pitch));
    always_ff @(posedge clk_div) begin
-      if (rst) begin
+      if (rst_div) begin
          period <= 0;
       end
       else begin
@@ -39,7 +45,7 @@ module channel (/*AUTOARG*/
    end
 
    // Signals for each waveform
-   wire [10:0] square, triangle, sine, sawtooth;
+   wire [10:0] square, triangle, sine, saw;
 
    sq_wave_generator SQ_WAVE (/*AUTOINST*/
                               // Outputs
@@ -64,7 +70,7 @@ module channel (/*AUTOARG*/
 
    // Select which waveform signal to use
    always_comb begin
-      if (ena) begin
+      if (~ena) begin
          out = 0;
       end
       else begin
@@ -72,7 +78,7 @@ module channel (/*AUTOARG*/
            2'b00 : out = square;
            2'b01 : out = triangle;
            2'b10 : out = sine;
-           2'b11 : out = sawtooth;
+           2'b11 : out = saw;
          endcase
       end
    end
