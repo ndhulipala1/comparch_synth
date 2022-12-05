@@ -10,5 +10,5 @@ module sq_wave_generator(/*AUTOARG*/
    input  wire  [ 7:0] period;
    output logic [10:0] square;
 
-   always_comb square = (period[7]) ? 11'b1 : 11'b0;
+   always_comb square = (period[7]) ? -1 : 11'b0;
 endmodule
