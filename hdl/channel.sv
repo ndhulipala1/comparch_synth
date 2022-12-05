@@ -41,6 +41,27 @@ module channel (/*AUTOARG*/
    // Signals for each waveform
    wire [10:0] square, triangle, sine, sawtooth;
 
+   sq_wave_generator SQ_WAVE (/*AUTOINST*/
+                              // Outputs
+                              .square           (square[10:0]),
+                              // Inputs
+                              .period           (period[7:0]));
+   tri_wave_generator TRI_WAVE (/*AUTOINST*/
+                                // Outputs
+                                .triangle       (triangle[10:0]),
+                                // Inputs
+                                .period         (period[7:0]));
+   sine_wave_generator SINE_WAVE (/*AUTOINST*/
+                                  // Outputs
+                                  .sine                 (sine[10:0]),
+                                  // Inputs
+                                  .period               (period[7:0]));
+   saw_wave_generator SAW_WAVE (/*AUTOINST*/
+                                // Outputs
+                                .saw            (saw[10:0]),
+                                // Inputs
+                                .period         (period[7:0]));
+
    // Select which waveform signal to use
    always_comb begin
       if (ena) begin
