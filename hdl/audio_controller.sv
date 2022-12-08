@@ -3,7 +3,7 @@
 `default_nettype none
 `timescale 1ns / 100ps
 
-`define DAC_ADDR (7'h62) // TODO: define address for where DAC is in a separate file
+`define DAC_ADDR (7'h62) // TODO: define address for where DAC is properly
 
 module audio_controller(clk, rst, ena, scl, sda, channel1, channel2, out);
 
@@ -21,8 +21,11 @@ inout wire sda;
 input wire [10:0] channel1, channel2;
 output wire [11:0] out;
 
-// TODO: implement channel adding
+// Add waves together to get output wave
+wave_adder WAVE_ADDER(.clk(clk), .ena(ena), .rst(rst), .channel1(channel1), .channel2(channel2), .out(out));
 
+// Write output over I2C
+i2c_transaction_t i2c_mode;
 wire i_ready;
 logic i_valid;
 logic [11:0] i_data;
@@ -32,8 +35,8 @@ wire [11:0] o_data;
 
 i2c_controller #(.CLK_HZ(CLK_HZ), .I2C_CLK_HZ(I2C_CLK_HZ)) I2C0 (
   .clk(clk), .rst(rst), 
-  .scl(scl), .sda(sda),
-  .mode(i2c_mode), .i_ready(i_ready), .i_valid(i_valid), .i_addr(`DAC_ADDR), .i_data(i_data),
+  .scl(scl), .sda(sda), .mode(i2c_mode),
+  .i_ready(i_ready), .i_valid(i_valid), .i_addr(`DAC_ADDR), .i_data(i_data),
   .o_ready(o_ready), .o_valid(o_valid), .o_data(o_data)
 );
 
@@ -102,10 +105,8 @@ always_comb case(state)
   default: i_valid = 0;
 endcase 
 
-always_comb begin
-  // always in write mode; no need to read for MVP
-  i2c_mode = WRITE_8BIT_REGISTER;
-end
+// always in write mode; no need to read for MVP
+always_comb i2c_mode = WRITE_12BIT_REGISTER;
 
 
 always_comb case(state)

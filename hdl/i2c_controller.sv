@@ -103,10 +103,10 @@ always_ff @(posedge clk) begin : i2c_fsm
           //if(~sda) begin
           bit_counter <= 7;
           case(addr_buffer[0]) 
-            WRITE_8BIT_REGISTER : begin
+            WRITE_12BIT_REGISTER : begin
               if(scl) state <= S_WR_DATA;
             end
-            READ_8BIT : begin
+            READ_12BIT : begin
               if(~scl) state <= S_RD_DATA;
             end
           endcase

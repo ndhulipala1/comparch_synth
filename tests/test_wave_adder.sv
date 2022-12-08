@@ -26,7 +26,7 @@ module test_wave_adder;
 
       // Reset the clock divider
       clk = 0;
-      ena = 0;
+      ena = 1;
       rst = 1;
       repeat (2) @(negedge clk);
 
