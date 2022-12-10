@@ -1,10 +1,9 @@
 `default_nettype none
 `timescale 1ns/10ps
 
-module wave_adder(clk, ena, rst, channel1, channel2, out);
+module wave_adder(channel1, channel2, out);
 
 // Module I/O and parameters
-input wire clk, rst, ena;
 input wire [10:0] channel1, channel2;
 output logic [11:0] out;
 

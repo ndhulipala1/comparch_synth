@@ -1,22 +1,20 @@
 [*]
-[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Tue Dec  6 00:59:49 2022
+[*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
+[*] Sat Dec 10 19:32:11 2022
 [*]
-[dumpfile] "/home/softdes/ComputerArchitecture/comparch_synth/wave_adder.fst"
-[dumpfile_mtime] "Tue Dec  6 00:55:59 2022"
-[dumpfile_size] 18133
-[savefile] "/home/softdes/ComputerArchitecture/comparch_synth/tests/test_wave_adder.gtkw"
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/wave_adder.fst"
+[dumpfile_mtime] "Sat Dec 10 19:31:51 2022"
+[dumpfile_size] 16419
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_wave_adder.gtkw"
 [timestart] 0
-[size] 1018 600
+[size] 929 980
 [pos] -1 -1
 *-24.000000 5700000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test_wave_adder.
-[sst_width] 233
+[sst_width] 273
 [signals_width] 142
 [sst_expanded] 1
 [sst_vpaned_height] 144
-@28
-test_wave_adder.UUT.clk
 @200
 -Inputs
 @10022
