@@ -5,7 +5,7 @@ module test_channel;
    wire [10:0] out;
 
    // Inputs
-   logic clk, ena, rst, rst_div;
+   logic clk, ena, rst;
    logic [11:0] pitch;
    logic [1:0]  waveform;
 
@@ -26,8 +26,7 @@ module test_channel;
                .waveform                (waveform[1:0]),
                .clk                     (clk),
                .ena                     (ena),
-               .rst                     (rst),
-               .rst_div                 (rst_div));
+               .rst                     (rst));
 
    always #5 clk = ~clk;
 
@@ -39,20 +38,17 @@ module test_channel;
       clk = 0;
       ena = 0;
       rst = 1;
-      rst_div = 1;
       waveform = 0;
       pitch = 0;
       repeat (2) @(negedge clk);
 
       // Reset signals that depend on divided clock
       rst = 0;
-      rst_div = 1;
       pitch = 0; // Ensure minimum time to reset is taken
       repeat (4) @(negedge clk);
 
       // Test with A440Hz
       rst = 0;
-      rst_div = 0;
       ena = 1;
       pitch = A440;
 

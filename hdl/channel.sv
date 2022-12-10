@@ -14,15 +14,13 @@ module channel (/*AUTOARG*/
    // Outputs
    out,
    // Inputs
-   clk, ena, pitch, rst, rst_div, waveform
+   clk, ena, pitch, rst, waveform
    );
    output logic [10:0] out; // 11 bit output as DAC is 12 bits.
 
    input wire [11:0] pitch;
    input wire [1:0]  waveform;
-   input wire        clk, ena, rst,
-                     rst_div; // div_rst is to reset signals that use the
-                              // divided clock.
+   input wire        clk, ena, rst;
 
    // Internal counters
    logic [7:0] period; // 8bit counter to send to wave generators, the period
@@ -35,12 +33,27 @@ module channel (/*AUTOARG*/
                                         .clk         (clk),
                                         .rst         (rst),
                                         .divide      (pitch));
+
+   // Reset logic so rst signal also resets clk_div logic
+   logic rst_div,       // Signal to reset divider logic
+         rst_div_reset; // Signal goes high if divider logic has reset
+   always_ff @(posedge clk) begin
+      if (rst) begin
+         rst_div <= 1;
+      end
+      else if (rst_div_reset) begin
+         rst_div <= 0;
+      end
+   end
+
    always_ff @(posedge clk_div) begin
       if (rst_div) begin
-         period <= 0;
+         period        <= 0;
+         rst_div_reset <= 1;
       end
       else begin
-         period <= period + 1;
+         period        <= period + 1;
+         rst_div_reset <= 0;
       end
    end
 
