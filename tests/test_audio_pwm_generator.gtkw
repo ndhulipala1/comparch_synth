@@ -1,0 +1,59 @@
+[*]
+[*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
+[*] Sat Dec 10 18:13:08 2022
+[*]
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/audio_pwm_generator.fst"
+[dumpfile_mtime] "Sat Dec 10 18:06:16 2022"
+[dumpfile_size] 19027
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_audio_pwm_generator.gtkw"
+[timestart] 0
+[size] 1884 980
+[pos] -956 -1
+*-19.500000 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_audio_pwm_generator.
+[sst_width] 273
+[signals_width] 225
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@200
+-Input Flags
+@28
+test_audio_pwm_generator.UUT.rst
+test_audio_pwm_generator.UUT.ena
+@200
+-Internal Counters
+@22
+test_audio_pwm_generator.UUT.pwm_counter[11:0]
+test_audio_pwm_generator.UUT.pwm_counter_rev[11:0]
+test_audio_pwm_generator.UUT.sample_timer[8:0]
+@200
+-Clock
+@28
+test_audio_pwm_generator.UUT.clk
+@200
+-Audio Signals
+@22
+test_audio_pwm_generator.UUT.sample[11:0]
+@c08023
++{analog sample[11:0]} test_audio_pwm_generator.UUT.sample[11:0]
+@28
+(0)test_audio_pwm_generator.UUT.sample[11:0]
+(1)test_audio_pwm_generator.UUT.sample[11:0]
+(2)test_audio_pwm_generator.UUT.sample[11:0]
+(3)test_audio_pwm_generator.UUT.sample[11:0]
+(4)test_audio_pwm_generator.UUT.sample[11:0]
+(5)test_audio_pwm_generator.UUT.sample[11:0]
+(6)test_audio_pwm_generator.UUT.sample[11:0]
+(7)test_audio_pwm_generator.UUT.sample[11:0]
+(8)test_audio_pwm_generator.UUT.sample[11:0]
+(9)test_audio_pwm_generator.UUT.sample[11:0]
+(10)test_audio_pwm_generator.UUT.sample[11:0]
+(11)test_audio_pwm_generator.UUT.sample[11:0]
+@1409201
+-group_end
+@8022
+test_audio_pwm_generator.UUT.audio[11:0]
+@28
+test_audio_pwm_generator.UUT.pwm_out
+[pattern_trace] 1
+[pattern_trace] 0

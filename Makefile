@@ -41,6 +41,13 @@ test_wave_adder: tests/test_wave_adder.sv hdl/wave_adder.sv
 test_audio_controller: tests/test_audio_controller.sv ${CONTROLLER_SRCS}
 	${IVERILOG} $^ -o test_audio_controller.bin && ${VVP} test_audio_controller.bin ${VVP_POST}
 
+test_audio_pwm_generator: tests/test_audio_pwm_generator.sv hdl/wave_adder.sv hdl/audio_pwm_generator.sv hdl/sine_wave_generator.sv
+	${IVERILOG} $^ -o test_audio_pwm_generator.bin && ${VVP} test_audio_pwm_generator.bin ${VVP_POST}
+
+waves_audio_pwm_generator: test_audio_pwm_generator
+	gtkwave audio_pwm_generator.fst -a tests/test_audio_pwm_generator.gtkw
+
+
 waves_channel: test_channel
 	gtkwave channel.fst -a tests/test_channel.gtkw
 
