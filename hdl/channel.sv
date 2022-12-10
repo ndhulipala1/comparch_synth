@@ -39,7 +39,7 @@ module channel (/*AUTOARG*/
    logic rst_div,       // Signal to reset divider logic
          rst_div_reset; // Signal goes high if divider logic has reset
 
-   always_comb divide = rst_div ? 0 : pitch;
+   always_comb divide = (rst_div | rst_div_reset) ? 0 : pitch;
 
    always_ff @(posedge clk) begin
       if (rst) begin
