@@ -26,17 +26,21 @@ module channel (/*AUTOARG*/
    logic [7:0] period; // 8bit counter to send to wave generators, the period
                        // of the wave goes from 0 to 255
 
-   wire clk_div;
+   wire         clk_div;
+   logic [11:0] divide; // Divide ratio
    clock_divider #(.N(12)) CLK_DIVIDER (// Outputs
                                         .clk_divided (clk_div),
                                         // Inputs
                                         .clk         (clk),
                                         .rst         (rst),
-                                        .divide      (pitch));
+                                        .divide      (divide));
 
    // Reset logic so rst signal also resets clk_div logic
    logic rst_div,       // Signal to reset divider logic
          rst_div_reset; // Signal goes high if divider logic has reset
+
+   always_comb divide = rst_div ? 0 : pitch;
+
    always_ff @(posedge clk) begin
       if (rst) begin
          rst_div <= 1;

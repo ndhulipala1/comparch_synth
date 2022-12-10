@@ -39,12 +39,12 @@ module test_channel;
       ena = 0;
       rst = 1;
       waveform = 0;
-      pitch = 0;
+      pitch = 100; // Should be irrelevant during reset but set it to something
       repeat (2) @(negedge clk);
 
       // Reset signals that depend on divided clock
       rst = 0;
-      pitch = 0; // Ensure minimum time to reset is taken
+      pitch = 100; // The input pitch should be ignored during a clock divide reset
       repeat (4) @(negedge clk);
 
       // Test with A440Hz
