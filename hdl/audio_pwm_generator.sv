@@ -39,7 +39,7 @@ module audio_pwm_generator(/*AUTOARG*/
          sample       <= audio;
          sample_timer <= RELOAD;
       end
-      if (ena) begin
+      else if (ena) begin
          if (sample_timer == 0) begin // Retake sample
             sample       <= audio;
             sample_timer <= RELOAD;
@@ -71,14 +71,14 @@ module audio_pwm_generator(/*AUTOARG*/
       if (rst) begin
          pwm_counter <= 0;
       end
-      if (ena) begin
+      else if (ena) begin
          pwm_counter <= pwm_counter + 1;
       end
    end
    // Modulate sample based off reversed counter
    always_ff @(posedge clk) begin
       if (ena) begin
-         pwm_out <= (sample >= pwm_counter_rev);
+         pwm_out <= (sample >= pwm_counter_rev) & (sample != 0);
       end
    end
 
