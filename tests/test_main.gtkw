@@ -1,0 +1,47 @@
+[*]
+[*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
+[*] Sat Dec 10 23:06:23 2022
+[*]
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/main.fst"
+[dumpfile_mtime] "Sat Dec 10 23:05:02 2022"
+[dumpfile_size] 123155
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_main.gtkw"
+[timestart] 0
+[size] 1884 980
+[pos] -1 -1
+*-29.400002 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_main.
+[sst_width] 273
+[signals_width] 190
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@200
+-Inputs
+@28
+test_main.UUT.rst
+test_main.UUT.buttons[1:0]
+test_main.UUT.clk
+@200
+-Channel Params
+@22
+test_main.UUT.channel1_pitch[11:0]
+test_main.UUT.channel2_pitch[11:0]
+@28
+test_main.UUT.waveform1[1:0]
+test_main.UUT.waveform2[1:0]
+test_main.UUT.channel1_ena
+test_main.UUT.channel2_ena
+@200
+-Audio
+@8022
+test_main.UUT.channel1_out[10:0]
+test_main.UUT.channel2_out[10:0]
+[color] 1
+test_main.UUT.audio[11:0]
+@200
+-Outputs
+@29
+[color] 1
+test_main.UUT.pwm_out
+[pattern_trace] 1
+[pattern_trace] 0

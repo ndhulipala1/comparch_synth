@@ -11,11 +11,17 @@ CONTROLLER_SRCS=hdl/audio_controller.sv hdl/i2c_controller.sv hdl/wave_adder.sv
 
 
 # Add any new source files needed for the final bitstream here
-MAIN_SRCS=hdl/main.sv hdl/pulse_generator.sv hdl/pwm.sv hdl/triangle_generator.sv hdl/block_ram.sv ${ILI9341_SRCS} ${FT6206_SRCS}
+MAIN_SRCS=hdl/main.sv ${CHANNEL_SRCS} hdl/wave_adder.sv hdl/audio_pwm_generator.sv
 MAIN_MEMORIES=memories/ili9341_init.memh
 
 # Look up .PHONY rules for Makefiles
 .PHONY: clean submission remove_solutions
+
+test_main: tests/test_main.sv ${MAIN_SRCS}
+	${IVERILOG} $^ -o test_main.bin && ${VVP} test_main.bin ${VVP_POST}
+
+waves_main: test_main
+	gtkwave main.fst -a tests/test_main.gtkw
 
 test_sq_wave_generator: tests/test_sq_wave_generator.sv hdl/sq_wave_generator.sv
 	${IVERILOG} $^ -o test_sq_wave_generator.bin && ${VVP} test_sq_wave_generator.bin ${VVP_POST}
@@ -97,10 +103,6 @@ test_ft6206_controller : tests/test_ft6206_controller.sv tests/ft6206_model.sv $
 	${IVERILOG} ${FT6206_SRCS} tests/test_ft6206_controller.sv tests/ft6206_model.sv -o test_ft6206.bin && ${VVP} test_ft6206.bin ${VVP_POST}
 waves_ft6206_controller: test_ft6206_controller
 	gtkwave ft6206_controller.fst -a tests/ft6206_controller.gtkw
-
-test_main: tests/test_main.sv ${MAIN_SRCS} memories/ili9341_init.memh tests/ft6206_model.sv tests/touch_generator.sv
-	@echo "This might take a while, we're testing a lot of clock cycles!"
-	${IVERILOG} tests/test_main.sv tests/ft6206_model.sv tests/touch_generator.sv ${MAIN_SRCS} -o test_main.bin && ${VVP} test_main.bin ${VVP_POST}
 
 main.bit: $(MAIN_SRCS) $(MAIN_MEMORIES) memories/ili9341_init.memh build.tcl main.xdc
 	@echo "########################################"
