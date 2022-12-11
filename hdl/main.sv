@@ -8,7 +8,7 @@ module main(/*AUTOARG*/
    buttons, clk, rst
    );
    input wire clk, rst;
-   
+
    input  wire [1:0] buttons;
    output wire       pwm_out; // Driven by module
    output logic      shutdown_b, gain; // For the pmodamp2
@@ -18,7 +18,6 @@ module main(/*AUTOARG*/
       shutdown_b = 1; // Should remain high
       gain       = 1; // 0 is 12DB, 1 is 6DB
    end
-                     
 
    // Map buttons to channel enable signals
    logic channel1_ena, channel2_ena;
@@ -35,7 +34,7 @@ module main(/*AUTOARG*/
       // A 5th (or the best approximation of one we can make)
       // pitch1 = 52; // A4, 440Hz
       // pitch2 = 35; // E5, 659Hz
-      
+
       // Rufford Park Poachers Simulator Rehearsal B to F
       channel1_pitch = 178; // C3, Neel Trombone
       channel2_pitch = 44;  // C5, Devlin Flute
@@ -83,5 +82,5 @@ module main(/*AUTOARG*/
                                       .audio            (audio[11:0]),
                                       .clk              (clk),
                                       .rst              (rst));
-   
+
 endmodule

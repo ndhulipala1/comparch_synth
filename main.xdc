@@ -1,9 +1,13 @@
+# Buttons 1 and 2 control channels 1 and 2.
+# Pin 1 is used as an input for reset (pull down resistor with push button high)
+
+
 # set_property CONFIG_VOLTAGE 3.3 [current_design]
 # set_property CFGBVS VCCO [current_design]
 
 ## Clock signal 12 MHz
-set_property -dict { PACKAGE_PIN L17   IOSTANDARD LVCMOS33 } [get_ports { sysclk }]; #IO_L12P_T1_MRCC_14 Sch=gclk
-create_clock -add -name sys_clk_pin -period 83.33 -waveform {0 41.66} [get_ports {sysclk}];
+set_property -dict { PACKAGE_PIN L17   IOSTANDARD LVCMOS33 } [get_ports { clk }]; #IO_L12P_T1_MRCC_14 Sch=gclk
+create_clock -add -name sys_clk_pin -period 83.33 -waveform {0 41.66} [get_ports {clk}];
 
 
 ## LEDs
@@ -12,7 +16,7 @@ create_clock -add -name sys_clk_pin -period 83.33 -waveform {0 41.66} [get_ports
 
 # set_property -dict { PACKAGE_PIN B17   IOSTANDARD LVCMOS33 } [get_ports { rgb[2] }]; #IO_L14N_T2_SRCC_16 Sch=led0_b
 # set_property -dict { PACKAGE_PIN B16   IOSTANDARD LVCMOS33 } [get_ports { rgb[1] }]; #IO_L13N_T2_MRCC_16 Sch=led0_g
-# set_property -dict { PACKAGE_PIN C17   IOSTANDARD LVCMOS33 } [get_ports { rgb[0] }]; #IO_L14P_T2_SRCC_16 Sch=led0_r
+# set_pro perty -dict { PACKAGE_PIN C17   IOSTANDARD LVCMOS33 } [get_ports { rgb[0] }]; #IO_L14P_T2_SRCC_16 Sch=led0_r
 
 ## Buttons
 set_property -dict { PACKAGE_PIN A18   IOSTANDARD LVCMOS33 } [get_ports { buttons[0] }]; #IO_L19N_T3_VREF_16 Sch=btn[0]
@@ -28,10 +32,10 @@ set_property -dict { PACKAGE_PIN B18   IOSTANDARD LVCMOS33 } [get_ports { button
 # 5: GND
 # 6: Power
 
-set_property -dict { PACKAGE_PIN G17   IOSTANDARD LVCMOS33 } [get_ports { pwm_out }]; #IO_L5N_T0_D07_14 Sch=ja[1]
-set_property -dict { PACKAGE_PIN G19   IOSTANDARD LVCMOS33 } [get_ports { gain }]; #IO_L4N_T0_D05_14 Sch=ja[2]
+set_property -dict { PACKAGE_PIN G17   IOSTANDARD LVCMOS33 } [get_ports { pwm_out[0] }]; #IO_L5N_T0_D07_14 Sch=ja[1]
+set_property -dict { PACKAGE_PIN G19   IOSTANDARD LVCMOS33 } [get_ports { gain[0] }]; #IO_L4N_T0_D05_14 Sch=ja[2]
 # set_property -dict { PACKAGE_PIN N18   IOSTANDARD LVCMOS33 } [get_ports { pmod[2] }]; #IO_L9P_T1_DQS_14 Sch=ja[3]
-set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { shutdown_b }]; #IO_L8P_T1_D11_14 Sch=ja[4]
+set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { shutdown_b[0] }]; #IO_L8P_T1_D11_14 Sch=ja[4]
 
 
 # set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { pmod[4] }]; #IO_L5P_T0_D06_14 Sch=ja[7]
@@ -42,7 +46,8 @@ set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { shutdo
 
 ## GPIO Pins
 ## Pins 15 and 16 should remain commented if using them as analog inputs
-#set_property -dict { PACKAGE_PIN M3    IOSTANDARD LVCMOS33 } [get_ports { pio[01] }]; #IO_L8N_T1_AD14N_35 Sch=pio[01]
+set_property -dict { PACKAGE_PIN M3    IOSTANDARD LVCMOS33 } [get_ports { rst[0] }]; #IO_L8N_T1_AD14N_35 Sch=pio[01]
+
 #set_property -dict { PACKAGE_PIN L3    IOSTANDARD LVCMOS33 } [get_ports { pio[02] }]; #IO_L8P_T1_AD14P_35 Sch=pio[02]
 #set_property -dict { PACKAGE_PIN A16   IOSTANDARD LVCMOS33 } [get_ports { pio[03] }]; #IO_L12P_T1_MRCC_16 Sch=pio[03]
 #set_property -dict { PACKAGE_PIN K3    IOSTANDARD LVCMOS33 } [get_ports { pio[04] }]; #IO_L7N_T1_AD6N_35 Sch=pio[04]
