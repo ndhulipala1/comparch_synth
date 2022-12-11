@@ -2,7 +2,7 @@
 
 module test_main;
    // Outputs
-   wire pwm_out;
+   wire pwm_out, shutdown_b, gain;
 
    // Inputs
    logic       clk, rst;
@@ -12,10 +12,11 @@ module test_main;
    parameter CLOCK_FREQ  = 12_000_000; // 12MHz
    parameter NOTE_CYCLES =    200_000;
 
-
    main UUT(/*AUTOINST*/
             // Outputs
             .pwm_out                    (pwm_out),
+            .shutdown_b                 (shutdown_b),
+            .gain                       (gain),
             // Inputs
             .clk                        (clk),
             .rst                        (rst),

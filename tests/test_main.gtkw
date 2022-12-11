@@ -1,9 +1,9 @@
 [*]
 [*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
-[*] Sat Dec 10 23:06:23 2022
+[*] Sun Dec 11 01:48:07 2022
 [*]
 [dumpfile] "/Documents/Documents/Programs/comparch_synth/main.fst"
-[dumpfile_mtime] "Sat Dec 10 23:05:02 2022"
+[dumpfile_mtime] "Sun Dec 11 01:47:44 2022"
 [dumpfile_size] 123155
 [savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_main.gtkw"
 [timestart] 0
@@ -40,8 +40,12 @@ test_main.UUT.channel2_out[10:0]
 test_main.UUT.audio[11:0]
 @200
 -Outputs
-@29
+@28
 [color] 1
 test_main.UUT.pwm_out
+@29
+test_main.UUT.gain
+@28
+test_main.UUT.shutdown_b
 [pattern_trace] 1
 [pattern_trace] 0

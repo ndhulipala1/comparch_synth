@@ -5,46 +5,39 @@
 set_property -dict { PACKAGE_PIN L17   IOSTANDARD LVCMOS33 } [get_ports { sysclk }]; #IO_L12P_T1_MRCC_14 Sch=gclk
 create_clock -add -name sys_clk_pin -period 83.33 -waveform {0 41.66} [get_ports {sysclk}];
 
-## LEDs
-set_property -dict { PACKAGE_PIN A17   IOSTANDARD LVCMOS33 } [get_ports { leds[0] }]; #IO_L12N_T1_MRCC_16 Sch=led[1]
-set_property -dict { PACKAGE_PIN C16   IOSTANDARD LVCMOS33 } [get_ports { leds[1] }]; #IO_L13P_T2_MRCC_16 Sch=led[2]
 
-set_property -dict { PACKAGE_PIN B17   IOSTANDARD LVCMOS33 } [get_ports { rgb[2] }]; #IO_L14N_T2_SRCC_16 Sch=led0_b
-set_property -dict { PACKAGE_PIN B16   IOSTANDARD LVCMOS33 } [get_ports { rgb[1] }]; #IO_L13N_T2_MRCC_16 Sch=led0_g
-set_property -dict { PACKAGE_PIN C17   IOSTANDARD LVCMOS33 } [get_ports { rgb[0] }]; #IO_L14P_T2_SRCC_16 Sch=led0_r
+## LEDs
+# set_property -dict { PACKAGE_PIN A17   IOSTANDARD LVCMOS33 } [get_ports { leds[0] }]; #IO_L12N_T1_MRCC_16 Sch=led[1]
+# set_property -dict { PACKAGE_PIN C16   IOSTANDARD LVCMOS33 } [get_ports { leds[1] }]; #IO_L13P_T2_MRCC_16 Sch=led[2]
+
+# set_property -dict { PACKAGE_PIN B17   IOSTANDARD LVCMOS33 } [get_ports { rgb[2] }]; #IO_L14N_T2_SRCC_16 Sch=led0_b
+# set_property -dict { PACKAGE_PIN B16   IOSTANDARD LVCMOS33 } [get_ports { rgb[1] }]; #IO_L13N_T2_MRCC_16 Sch=led0_g
+# set_property -dict { PACKAGE_PIN C17   IOSTANDARD LVCMOS33 } [get_ports { rgb[0] }]; #IO_L14P_T2_SRCC_16 Sch=led0_r
 
 ## Buttons
 set_property -dict { PACKAGE_PIN A18   IOSTANDARD LVCMOS33 } [get_ports { buttons[0] }]; #IO_L19N_T3_VREF_16 Sch=btn[0]
 set_property -dict { PACKAGE_PIN B18   IOSTANDARD LVCMOS33 } [get_ports { buttons[1] }]; #IO_L19P_T3_16 Sch=btn[1]
 
+
 ## Pmod Header JA
-set_property -dict { PACKAGE_PIN G17   IOSTANDARD LVCMOS33 } [get_ports { pmod[0] }]; #IO_L5N_T0_D07_14 Sch=ja[1]
-set_property -dict { PACKAGE_PIN G19   IOSTANDARD LVCMOS33 } [get_ports { pmod[1] }]; #IO_L4N_T0_D05_14 Sch=ja[2]
-set_property -dict { PACKAGE_PIN N18   IOSTANDARD LVCMOS33 } [get_ports { pmod[2] }]; #IO_L9P_T1_DQS_14 Sch=ja[3]
-set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { pmod[3] }]; #IO_L8P_T1_D11_14 Sch=ja[4]
-set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { pmod[4] }]; #IO_L5P_T0_D06_14 Sch=ja[7]
-set_property -dict { PACKAGE_PIN H19   IOSTANDARD LVCMOS33 } [get_ports { pmod[5] }]; #IO_L4P_T0_D04_14 Sch=ja[8]
-set_property -dict { PACKAGE_PIN J19   IOSTANDARD LVCMOS33 } [get_ports { pmod[6] }]; #IO_L6N_T0_D08_VREF_14 Sch=ja[9]
-set_property -dict { PACKAGE_PIN K18   IOSTANDARD LVCMOS33 } [get_ports { pmod[7] }]; #IO_L8N_T1_D12_14 Sch=ja[10]
+# Amp plugs right into this. Pin1 on the amp is Pin1 on the header
+# 1: pwm_out
+# 2: gain
+# 3: Not connected
+# 4: shutdown_b
+# 5: GND
+# 6: Power
+
+set_property -dict { PACKAGE_PIN G17   IOSTANDARD LVCMOS33 } [get_ports { pwm_out }]; #IO_L5N_T0_D07_14 Sch=ja[1]
+set_property -dict { PACKAGE_PIN G19   IOSTANDARD LVCMOS33 } [get_ports { gain }]; #IO_L4N_T0_D05_14 Sch=ja[2]
+# set_property -dict { PACKAGE_PIN N18   IOSTANDARD LVCMOS33 } [get_ports { pmod[2] }]; #IO_L9P_T1_DQS_14 Sch=ja[3]
+set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { shutdown_b }]; #IO_L8P_T1_D11_14 Sch=ja[4]
 
 
-# ILI9341 Display Controller + FT6206 Capacitive Controller - Recommended Wiring
-# Uncomment if this matches how you wired the display!
-# set_property -dict { PACKAGE_PIN W3    IOSTANDARD LVCMOS33 } [get_ports { interface_mode[0] }]; #IO_L6N_T0_VREF_34 Sch=pio[34]
-# set_property -dict { PACKAGE_PIN V3    IOSTANDARD LVCMOS33 } [get_ports { interface_mode[1] }]; #IO_L6P_T0_34 Sch=pio[35]
-# set_property -dict { PACKAGE_PIN W5    IOSTANDARD LVCMOS33 } [get_ports { interface_mode[2] }]; #IO_L12P_T1_MRCC_34 Sch=pio[36]
-# set_property -dict { PACKAGE_PIN V4    IOSTANDARD LVCMOS33 } [get_ports { interface_mode[3] }]; #IO_L11N_T1_SRCC_34 Sch=pio[37]
-# set_property -dict { PACKAGE_PIN U4    IOSTANDARD LVCMOS33 } [get_ports { touch_i2c_scl }]; #IO_L11P_T1_SRCC_34 Sch=pio[38]
-# set_property -dict { PACKAGE_PIN V5    IOSTANDARD LVCMOS33 } [get_ports { touch_i2c_sda }]; #IO_L16N_T2_34 Sch=pio[39]
-# set_property -dict { PACKAGE_PIN W4    IOSTANDARD LVCMOS33 } [get_ports { touch_irq }]; #IO_L12N_T1_MRCC_34 Sch=pio[40]
-# # set_property -dict { PACKAGE_PIN U5    IOSTANDARD LVCMOS33 } [get_ports { pio[41] }]; #IO_L16P_T2_34 Sch=pio[41] #skipping it, it's the gnd pin
-# set_property -dict { PACKAGE_PIN U2    IOSTANDARD LVCMOS33 } [get_ports { backlight }]; #IO_L9N_T1_DQS_34 Sch=pio[42]
-# set_property -dict { PACKAGE_PIN W6    IOSTANDARD LVCMOS33 } [get_ports { display_rstb }]; #IO_L13N_T2_MRCC_34 Sch=pio[43]
-# set_property -dict { PACKAGE_PIN U3    IOSTANDARD LVCMOS33 } [get_ports { data_commandb }]; #IO_L9P_T1_DQS_34 Sch=pio[44]
-# set_property -dict { PACKAGE_PIN U7    IOSTANDARD LVCMOS33 } [get_ports { display_csb }]; #IO_L19P_T3_34 Sch=pio[45]
-# set_property -dict { PACKAGE_PIN W7    IOSTANDARD LVCMOS33 } [get_ports { spi_mosi }]; #IO_L13P_T2_MRCC_34 Sch=pio[46]
-# set_property -dict { PACKAGE_PIN U8    IOSTANDARD LVCMOS33 } [get_ports { spi_miso }]; #IO_L14P_T2_SRCC_34 Sch=pio[47]
-# set_property -dict { PACKAGE_PIN V8    IOSTANDARD LVCMOS33 } [get_ports { spi_clk }]; #IO_L14N_T2_SRCC_34 Sch=pio[48]
+# set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { pmod[4] }]; #IO_L5P_T0_D06_14 Sch=ja[7]
+# set_property -dict { PACKAGE_PIN H19   IOSTANDARD LVCMOS33 } [get_ports { pmod[5] }]; #IO_L4P_T0_D04_14 Sch=ja[8]
+# set_property -dict { PACKAGE_PIN J19   IOSTANDARD LVCMOS33 } [get_ports { pmod[6] }]; #IO_L6N_T0_D08_VREF_14 Sch=ja[9]
+# set_property -dict { PACKAGE_PIN K18   IOSTANDARD LVCMOS33 } [get_ports { pmod[7] }]; #IO_L8N_T1_D12_14 Sch=ja[10]
 
 
 ## GPIO Pins

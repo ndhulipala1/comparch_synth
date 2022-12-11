@@ -3,7 +3,7 @@
 
 module main(/*AUTOARG*/
    // Outputs
-   pwm_out,
+   gain, pwm_out, shutdown_b,
    // Inputs
    buttons, clk, rst
    );
@@ -11,6 +11,14 @@ module main(/*AUTOARG*/
    
    input  wire [1:0] buttons;
    output wire       pwm_out; // Driven by module
+   output logic      shutdown_b, gain; // For the pmodamp2
+
+   // Tie amp control signals
+   always_comb begin
+      shutdown_b = 1; // Should remain high
+      gain       = 1; // 0 is 12DB, 1 is 6DB
+   end
+                     
 
    // Map buttons to channel enable signals
    logic channel1_ena, channel2_ena;

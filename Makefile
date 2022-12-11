@@ -89,7 +89,7 @@ waves_i2c_controller: test_i2c_controller
 	gtkwave i2c_controller.fst -a tests/i2c_controller.gtkw
 
 
-main.bit: $(MAIN_SRCS) $(MAIN_MEMORIES) memories/ili9341_init.memh build.tcl main.xdc
+main.bit: $(MAIN_SRCS) main.xdc
 	@echo "########################################"
 	@echo "#### Building FPGA bitstream        ####"
 	@echo "########################################"
