@@ -3,7 +3,7 @@
 
 module main(/*AUTOARG*/
    // Outputs
-   gain, pwm_out, shutdown_b,
+   gain, leds, pwm_out, shutdown_b,
    // Inputs
    buttons, clk, rst
    );
@@ -11,17 +11,23 @@ module main(/*AUTOARG*/
 
    input wire clk, rst;
 
-   input  wire [NUM_BUTTONS-1:0] buttons;
-   output wire                   pwm_out; // Driven by module
-   output logic                  shutdown_b, gain; // For the pmodamp2
+   input  wire  [NUM_BUTTONS-1:0] buttons;
+   output wire                    pwm_out; // Driven by module
+   output logic                   shutdown_b, gain; // For the pmodamp2
+   output logic [1:0]             leds;             
 
-   
    // Debounce all buttons
    logic [NUM_BUTTONS-1:0] buttons_db;
    bus_debouncer #(.N(NUM_BUTTONS)) BUS_DEBOUNCER (.clk           (clk), 
                                                    .rst           (rst), 
                                                    .bouncy_in     (buttons), 
                                                    .debounced_out (buttons_db));
+
+   // Debug LEDs
+   always_comb begin
+      leds[0] = buttons_db[1];
+      leds[1] = buttons_db[2];
+   end
    
    // Tie amp control signals
    always_comb begin
