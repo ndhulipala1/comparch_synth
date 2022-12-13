@@ -26,7 +26,7 @@ enum logic [1:0] {
 always_ff @(posedge clk) begin : waveform_fsm
     if (rst) begin
         state <= S_SQUARE;
-    end else begin
+    end else if (ena) begin
         case (state)
         S_SQUARE: if (waveform_db_and_mono) state <= S_TRIANGLE;
         S_TRIANGLE: if (waveform_db_and_mono) state <= S_SINE;
