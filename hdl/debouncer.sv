@@ -16,7 +16,7 @@ enum logic [1:0] {
 //clog2 = ceiling(log_base_2(x)) - how many bits do I need
 logic [$clog2(BOUNCE_TICKS):0] counter;
 
-always_ff begin : main_FSM
+always_ff @(posedge clk) begin : main_FSM
   if(rst) begin
     state <= S_0;
     counter <= 0;
@@ -48,16 +48,18 @@ always_ff begin : main_FSM
           // state <= bouncy_in ? S_1 : S_0;
         end
       end
-      default: state <= 2'bxx;
+      default: state <= S_0; // This should never occur
     endcase
   end
 end
 
 always_comb begin
-    case (state)
-        S_0: debounced_out = 0;
-        S_1: debounced_out = 1;
-    endcase
+   case (state)
+     S_0       : debounced_out = 0;
+     S_MAYBE_1 : debounced_out = 0;
+     S_1       : debounced_out = 1;
+     S_MAYBE_0 : debounced_out = 1;
+   endcase
 end
 
 
