@@ -36,16 +36,16 @@ always_ff @(posedge clk) begin : main_FSM
       end
       S_MAYBE_0: begin
         if(counter >= BOUNCE_TICKS) begin // we've waited long enough
-            if (~bouncy_in) state <= S_0;
-            else state <= S_1;
+           state <= bouncy_in ? S_1 : S_0;
+        end else begin
+           counter <= counter + 1;
         end
       end
       S_MAYBE_1: begin
         if(counter >= BOUNCE_TICKS) begin // we've waited long enough
-          if (bouncy_in) state <= S_1;
-          else state <= S_0;
-          // if else - that's a mux:
-          // state <= bouncy_in ? S_1 : S_0;
+          state <= bouncy_in ? S_1 : S_0;
+        end else begin
+           counter <= counter + 1;
         end
       end
       default: state <= S_0; // This should never occur
