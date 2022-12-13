@@ -5,14 +5,21 @@ module main(/*AUTOARG*/
    // Outputs
    gain, pwm_out, shutdown_b,
    // Inputs
-   buttons, clk, rst
+   buttons, waveform_mode, clk, rst
    );
+   parameter NUM_BUTTONS = 3;
+
    input wire clk, rst;
 
-   input  wire [1:0] buttons;
+   input  wire [N-1:0] buttons;
+   input  wire       waveform_mode;
    output wire       pwm_out; // Driven by module
    output logic      shutdown_b, gain; // For the pmodamp2
 
+   // Debounce all buttons
+   logic [N-1:0] buttons_db;
+   bus_debouncer #(.N(NUM_BUTTONS)) BUS_DEBOUNCER (.clk(clk), .rst(rst), .bouncy_in(buttons), .debounced_out(buttons_db));
+   
    // Tie amp control signals
    always_comb begin
       shutdown_b = 1; // Should remain high
@@ -22,8 +29,8 @@ module main(/*AUTOARG*/
    // Map buttons to channel enable signals
    logic channel1_ena, channel2_ena;
    always_comb begin
-      channel1_ena = buttons[0];
-      channel2_ena = buttons[1];
+      channel1_ena = buttons_db[0];
+      channel2_ena = buttons_db[1];
    end
 
    // For now, tie each button to a specific pitch. Analog input can be handled
@@ -40,9 +47,13 @@ module main(/*AUTOARG*/
       channel2_pitch = 44;  // C5, Devlin Flute
 
       // Waveforms
-      waveform1 = 2'b10;
-      waveform2 = 2'b10;
+      waveform1 = waveform_type;
+      waveform2 = waveform_type;
    end // always_comb
+
+   // Get waveform type inputted
+   logic [1:0] waveform_type;
+   get_waveform WAVEFORM_MODE(.clk(clk), .rst(rst), .waveform_button(waveform_mode), .waveform_out(waveform_type));
 
    wire [10:0] channel1_out, channel2_out;
 
