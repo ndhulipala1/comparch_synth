@@ -1,5 +1,7 @@
-# Buttons 1 and 2 control channels 1 and 2.
-# Pin 1 is used as an input for reset (pull down resistor with push button high)
+# Button  0 is reset
+# Button  1 changes waveform
+# Pin     1 is channel 1
+# Pin    48 is channel 2
 
 
 set_property CONFIG_VOLTAGE 3.3 [current_design]
@@ -11,8 +13,8 @@ create_clock -add -name sys_clk_pin -period 83.33 -waveform {0 41.66} [get_ports
 
 
 ## LEDs
-# set_property -dict { PACKAGE_PIN A17   IOSTANDARD LVCMOS33 } [get_ports { leds[0] }]; #IO_L12N_T1_MRCC_16 Sch=led[1]
-# set_property -dict { PACKAGE_PIN C16   IOSTANDARD LVCMOS33 } [get_ports { leds[1] }]; #IO_L13P_T2_MRCC_16 Sch=led[2]
+set_property -dict { PACKAGE_PIN A17   IOSTANDARD LVCMOS33 } [get_ports { leds[0] }]; #IO_L12N_T1_MRCC_16 Sch=led[1]
+set_property -dict { PACKAGE_PIN C16   IOSTANDARD LVCMOS33 } [get_ports { leds[1] }]; #IO_L13P_T2_MRCC_16 Sch=led[2]
 
 # set_property -dict { PACKAGE_PIN B17   IOSTANDARD LVCMOS33 } [get_ports { rgb[2] }]; #IO_L14N_T2_SRCC_16 Sch=led0_b
 # set_property -dict { PACKAGE_PIN B16   IOSTANDARD LVCMOS33 } [get_ports { rgb[1] }]; #IO_L13N_T2_MRCC_16 Sch=led0_g
@@ -46,9 +48,14 @@ set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { shutdo
 
 ## GPIO Pins
 ## Pins 15 and 16 should remain commented if using them as analog inputs
-set_property -dict { PACKAGE_PIN M3    IOSTANDARD LVCMOS33 } [get_ports { buttons[1] }]; #IO_L8N_T1_AD14N_35 Sch=pio[01]
-set_property -dict { PACKAGE_PIN L3    IOSTANDARD LVCMOS33 } [get_ports { buttons[2] }]; #IO_L8P_T1_AD14P_35 Sch=pio[02]
 
+set_property -dict { PACKAGE_PIN M3    IOSTANDARD LVCMOS33 } [get_ports { buttons[1] }]; #IO_L8N_T1_AD14N_35 Sch=pio[01]
+
+set_property -dict { PACKAGE_PIN V8    IOSTANDARD LVCMOS33 } [get_ports { buttons[2] }]; #IO_L14N_T2_SRCC_34 Sch=pio[48]
+
+
+
+# set_property -dict { PACKAGE_PIN L3    IOSTANDARD LVCMOS33 } [get_ports { buttons[2] }]; #IO_L8P_T1_AD14P_35 Sch=pio[02]
 #set_property -dict { PACKAGE_PIN A16   IOSTANDARD LVCMOS33 } [get_ports { pio[03] }]; #IO_L12P_T1_MRCC_16 Sch=pio[03]
 #set_property -dict { PACKAGE_PIN K3    IOSTANDARD LVCMOS33 } [get_ports { pio[04] }]; #IO_L7N_T1_AD6N_35 Sch=pio[04]
 #set_property -dict { PACKAGE_PIN C15   IOSTANDARD LVCMOS33 } [get_ports { pio[05] }]; #IO_L11P_T1_SRCC_16 Sch=pio[05]
