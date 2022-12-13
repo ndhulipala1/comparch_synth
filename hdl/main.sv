@@ -5,20 +5,23 @@ module main(/*AUTOARG*/
    // Outputs
    gain, pwm_out, shutdown_b,
    // Inputs
-   buttons, waveform_mode, clk, rst
+   buttons, clk, rst
    );
    parameter NUM_BUTTONS = 3;
 
    input wire clk, rst;
 
-   input  wire [N-1:0] buttons;
-   input  wire       waveform_mode;
-   output wire       pwm_out; // Driven by module
-   output logic      shutdown_b, gain; // For the pmodamp2
+   input  wire [NUM_BUTTONS-1:0] buttons;
+   output wire                   pwm_out; // Driven by module
+   output logic                  shutdown_b, gain; // For the pmodamp2
 
+   
    // Debounce all buttons
-   logic [N-1:0] buttons_db;
-   bus_debouncer #(.N(NUM_BUTTONS)) BUS_DEBOUNCER (.clk(clk), .rst(rst), .bouncy_in(buttons), .debounced_out(buttons_db));
+   logic [NUM_BUTTONS-1:0] buttons_db;
+   bus_debouncer #(.N(NUM_BUTTONS)) BUS_DEBOUNCER (.clk           (clk), 
+                                                   .rst           (rst), 
+                                                   .bouncy_in     (buttons), 
+                                                   .debounced_out (buttons_db));
    
    // Tie amp control signals
    always_comb begin
@@ -26,11 +29,13 @@ module main(/*AUTOARG*/
       gain       = 1; // 0 is 12DB, 1 is 6DB
    end
 
-   // Map buttons to channel enable signals
+   // Map buttons
    logic channel1_ena, channel2_ena;
+   logic waveform_mode;
    always_comb begin
-      channel1_ena = buttons_db[0];
-      channel2_ena = buttons_db[1];
+      waveform_mode = buttons_db[0];
+      channel1_ena  = buttons_db[1];
+      channel2_ena  = buttons_db[2];
    end
 
    // For now, tie each button to a specific pitch. Analog input can be handled
@@ -53,7 +58,13 @@ module main(/*AUTOARG*/
 
    // Get waveform type inputted
    logic [1:0] waveform_type;
-   get_waveform WAVEFORM_MODE(.clk(clk), .rst(rst), .waveform_button(waveform_mode), .waveform_out(waveform_type));
+   get_waveform WAVEFORM_MODE(// Outputs
+                              .waveform_out    (waveform_type),
+                              // Inputs
+                              .clk             (clk),
+                              .rst             (rst),
+                              .ena             (1'b1), 
+                              .waveform_button (waveform_mode));
 
    wire [10:0] channel1_out, channel2_out;
 
