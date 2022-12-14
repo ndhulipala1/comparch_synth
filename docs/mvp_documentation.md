@@ -1,3 +1,10 @@
+---
+fontsize: 12pt
+geometry: margin=1in
+colorlinks: true
+---
+
+
 # Digital Synthesizer - MVP
 
 Devlin Ih and Neel Dhulipala
