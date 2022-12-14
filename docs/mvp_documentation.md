@@ -9,9 +9,12 @@ figPrefix:
 tblPrefix:
     - "Table"
     - "Tables"
-lstPrefix: 
+lstPrefix:
     - "Listing"
     - "Listings"
+eqnPrefix:
+    - "Equation"
+    - "Equations"
 codeBlockCaptions: true
 ---
 
