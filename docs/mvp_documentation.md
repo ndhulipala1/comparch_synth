@@ -2,6 +2,17 @@
 fontsize: 12pt
 geometry: margin=1in
 colorlinks: true
+urlcolor: blue
+figPrefix:
+    - "Figure"
+    - "Figures"
+tblPrefix:
+    - "Table"
+    - "Tables"
+lstPrefix: 
+    - "Listing"
+    - "Listings"
+codeBlockCaptions: true
 ---
 
 
