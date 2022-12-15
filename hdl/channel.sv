@@ -27,37 +27,27 @@ module channel (/*AUTOARG*/
                        // of the wave goes from 0 to 255
 
    wire         clk_div;
-   logic [11:0] divide; // Divide ratio
    clock_divider #(.N(12)) CLK_DIVIDER (// Outputs
                                         .clk_divided (clk_div),
                                         // Inputs
                                         .clk         (clk),
                                         .rst         (rst),
-                                        .divide      (divide));
+                                        .divide      (pitch));
 
-   // Reset logic so rst signal also resets clk_div logic
-   logic rst_div,       // Signal to reset divider logic
-         rst_div_reset; // Signal goes high if divider logic has reset
-
-   always_comb divide = (rst_div | rst_div_reset) ? 0 : pitch;
+   wire clk_div_pulse; // Feed divided clock into monostable
+   monostable CLK_DIVIDER_MONOSTABLE (// Outputs
+                                      .out     (clk_div_pulse),
+                                      // Inputs
+                                      .clk     (clk),
+                                      .rst     (rst),
+                                      .button  (clk_div));
 
    always_ff @(posedge clk) begin
       if (rst) begin
-         rst_div <= 1;
-      end
-      else if (rst_div_reset) begin
-         rst_div <= 0;
-      end
-   end
-
-   always_ff @(posedge clk_div) begin
-      if (rst_div) begin
-         period        <= 0;
-         rst_div_reset <= 1;
+         period <= 0;
       end
       else begin
-         period        <= period + 1;
-         rst_div_reset <= 0;
+         period <= clk_div_pulse ? period + 1 : period;
       end
    end
 

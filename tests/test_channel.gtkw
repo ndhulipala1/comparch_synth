@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
-[*] Sat Dec 10 19:16:29 2022
+[*] Thu Dec 15 17:38:41 2022
 [*]
-[dumpfile] "/Documents/Documents/Programs/comparch_synth/channel.fst"
-[dumpfile_mtime] "Sat Dec 10 19:16:12 2022"
-[dumpfile_size] 30427
-[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_channel.gtkw"
+[dumpfile] "/home/devlin/Documents/Programs/comparch_synth/channel.fst"
+[dumpfile_mtime] "Thu Dec 15 17:37:44 2022"
+[dumpfile_size] 30600
+[savefile] "/home/devlin/Documents/Programs/comparch_synth/tests/test_channel.gtkw"
 [timestart] 0
 [size] 1884 980
-[pos] -956 -1
-*-13.900000 4890 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 1899 -1
+*-26.900000 12990 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test_channel.
 [treeopen] test_channel.UUT.
 [sst_width] 273
@@ -34,19 +34,14 @@ test_channel.UUT.out[10:0]
 -Internal
 @24
 test_channel.UUT.period[7:0]
+@28
+test_channel.UUT.clk_div
+@29
+test_channel.UUT.clk_div_pulse
 @8022
 test_channel.UUT.saw[10:0]
 test_channel.UUT.sine[10:0]
 test_channel.UUT.square[10:0]
 test_channel.UUT.triangle[10:0]
-@28
-test_channel.UUT.clk_div
-@200
--Internal reset logic
-@23
-test_channel.UUT.divide[11:0]
-@28
-test_channel.UUT.rst_div
-test_channel.UUT.rst_div_reset
 [pattern_trace] 1
 [pattern_trace] 0

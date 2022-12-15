@@ -42,6 +42,10 @@ module test_channel;
       pitch = 100; // Should be irrelevant during reset but set it to something
       repeat (2) @(negedge clk);
 
+      // Leaving the code here but noting that this is now irrelevant after
+      // refactoring to use the monostable on the divided clock instead of the
+      // state machine for resetting divided clock logic
+
       // Reset signals that depend on divided clock
       rst = 0;
       pitch = 100; // The input pitch should be ignored during a clock divide reset

@@ -6,7 +6,7 @@ VVP_POST=-fst
 VIVADO=vivado -mode batch -source
 
 # Source files for large module tests
-CHANNEL_SRCS=hdl/channel.sv hdl/sq_wave_generator.sv hdl/tri_wave_generator.sv hdl/sine_wave_generator.sv hdl/saw_wave_generator.sv hdl/clock_divider.sv
+CHANNEL_SRCS=hdl/channel.sv hdl/sq_wave_generator.sv hdl/tri_wave_generator.sv hdl/sine_wave_generator.sv hdl/saw_wave_generator.sv hdl/clock_divider.sv hdl/monostable.sv
 CONTROLLER_SRCS=hdl/audio_controller.sv hdl/i2c_controller.sv hdl/wave_adder.sv
 
 
