@@ -163,11 +163,11 @@ Its inputs are `clk`, `rst`, and `bouncy_in[N-1:0]`, and
 its output is `debounced_out[N-1:0]`.
 
 Before understanding how that works, first we implemented a 1-bit debouncer.
-[@fig:db_fsm] shows the structure of the finite state machine (FSM). There are
-four main states: `S_0`, `S_1`, `S_MAYBE_0`, and `S_MAYBE_1`. The two former
-states (`S_0` and `S_1`) are enabled when the debouncer knows the button's
-state, and the latter two states (`S_MAYBE_0` and `S_MAYBE_1`) are active when
-the debouncer is trying to figure out the state of the button.
+The debounces FSM has four main states: `S_0`, `S_1`, `S_MAYBE_0`, and
+`S_MAYBE_1`. The two former states (`S_0` and `S_1`) are enabled when the
+debouncer knows the button's state, and the latter two states (`S_MAYBE_0` and
+`S_MAYBE_1`) are active when the debouncer is trying to figure out the state of
+the button.
 
 To switch between the states, we need a set number of `BOUNCE_TICKS` to process 
 how long to wait (i.e. how many clock cycles) to confirm the state of our button. 
