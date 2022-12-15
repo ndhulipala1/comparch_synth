@@ -70,9 +70,6 @@ The `channel` module is responsible for generating waveforms and adding effects
 to them. Its inputs are `clk`, `ena`, `rst`, `[11:0] pitch`, and `[1:0]
 waveform`. Its output is `[10:0] out`.
 
-**During a reset, the `channel` module needs 2 additional `clk` cycles after
-`rst` goes low to fully reset.**
-
 `channel` is able to select between 4 different waveforms, shown in
 [@tbl:waveforms]. It can generate frequencies in the from 5.7Hz to 23437.5Hz.
 the frequency generated is controlled from the `[11:0] pitch` input (0--4095)
