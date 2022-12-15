@@ -7,14 +7,10 @@ input wire clk, rst, ena;
 input wire waveform_button;
 output logic [1:0] waveform_out;
 
-// Debounce the button first to get a consistent signal
-wire waveform_db;
-debouncer DEBOUNCER (.clk(clk), .rst(rst), .bouncy_in(waveform_button), .debounced_out(waveform_db));
-
 // Monostable so that we don't change states every clock cycle
 // we hold button down
 logic waveform_db_and_mono;
-monostable MONO (.clk(clk), .rst(rst), .button(waveform_db), .out(waveform_db_and_mono));
+monostable MONO (.clk(clk), .rst(rst), .button(waveform_button), .out(waveform_db_and_mono));
 
 // FSM: determine the type of waveform
 enum logic [1:0] {
