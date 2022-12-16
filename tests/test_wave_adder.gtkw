@@ -1,31 +1,31 @@
 [*]
 [*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
-[*] Sat Dec 10 19:32:11 2022
+[*] Fri Dec 16 19:57:22 2022
 [*]
 [dumpfile] "/Documents/Documents/Programs/comparch_synth/wave_adder.fst"
-[dumpfile_mtime] "Sat Dec 10 19:31:51 2022"
-[dumpfile_size] 16419
+[dumpfile_mtime] "Fri Dec 16 19:56:48 2022"
+[dumpfile_size] 728
 [savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_wave_adder.gtkw"
 [timestart] 0
-[size] 929 980
-[pos] -1 -1
-*-24.000000 5700000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1884 980
+[pos] -956 -1
+*-13.500000 8130 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test_wave_adder.
 [sst_width] 273
-[signals_width] 142
+[signals_width] 174
 [sst_expanded] 1
 [sst_vpaned_height] 144
 @200
 -Inputs
-@10022
-[color] 2
-test_wave_adder.UUT.channel1[10:0]
-[color] 2
-test_wave_adder.UUT.channel2[10:0]
+@22
+test_wave_adder.UUT.channels[15:0]
+test_wave_adder.UUT.channels_ext[47:0]
+@23
+test_wave_adder.UUT.sums[47:0]
 @200
+-Internal
 -Outputs
-@10023
-[color] 1
-test_wave_adder.UUT.out[11:0]
+@22
+test_wave_adder.UUT.audio[11:0]
 [pattern_trace] 1
 [pattern_trace] 0
