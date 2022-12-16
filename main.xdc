@@ -50,12 +50,12 @@ set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { shutdo
 ## Pins 15 and 16 should remain commented if using them as analog inputs
 
 set_property -dict { PACKAGE_PIN M3    IOSTANDARD LVCMOS33 } [get_ports { buttons[1] }]; #IO_L8N_T1_AD14N_35 Sch=pio[01]
+set_property -dict { PACKAGE_PIN L3    IOSTANDARD LVCMOS33 } [get_ports { buttons[3] }]; #IO_L8P_T1_AD14P_35 Sch=pio[02]
 
 set_property -dict { PACKAGE_PIN V8    IOSTANDARD LVCMOS33 } [get_ports { buttons[2] }]; #IO_L14N_T2_SRCC_34 Sch=pio[48]
 
 
 
-# set_property -dict { PACKAGE_PIN L3    IOSTANDARD LVCMOS33 } [get_ports { buttons[2] }]; #IO_L8P_T1_AD14P_35 Sch=pio[02]
 #set_property -dict { PACKAGE_PIN A16   IOSTANDARD LVCMOS33 } [get_ports { pio[03] }]; #IO_L12P_T1_MRCC_16 Sch=pio[03]
 #set_property -dict { PACKAGE_PIN K3    IOSTANDARD LVCMOS33 } [get_ports { pio[04] }]; #IO_L7N_T1_AD6N_35 Sch=pio[04]
 #set_property -dict { PACKAGE_PIN C15   IOSTANDARD LVCMOS33 } [get_ports { pio[05] }]; #IO_L11P_T1_SRCC_16 Sch=pio[05]

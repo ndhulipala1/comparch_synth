@@ -7,20 +7,21 @@ module main(/*AUTOARG*/
    // Inputs
    buttons, clk, rst
    );
-   parameter NUM_BUTTONS = 3;
+   parameter NUM_CHANNELS = 2;
+   parameter NUM_BUTTONS  = NUM_CHANNELS + 2; // waveform select, demo
 
    input wire clk, rst;
 
-   input  wire  [NUM_BUTTONS-1:0] buttons;
+   input  wire  [NUM_BUTTONS-1:0] buttons; // Bus of all button inputs
    output wire                    pwm_out; // Driven by module
    output logic                   shutdown_b, gain; // For the pmodamp2
-   output logic [1:0]             leds;             
+   output logic [1:0]             leds;
 
    // Debounce all buttons
    logic [NUM_BUTTONS-1:0] buttons_db;
-   bus_debouncer #(.N(NUM_BUTTONS)) BUS_DEBOUNCER (.clk           (clk), 
-                                                   .rst           (rst), 
-                                                   .bouncy_in     (buttons), 
+   bus_debouncer #(.N(NUM_BUTTONS)) BUS_DEBOUNCER (.clk           (clk),
+                                                   .rst           (rst),
+                                                   .bouncy_in     (buttons),
                                                    .debounced_out (buttons_db));
 
    // Debug LEDs
@@ -28,39 +29,53 @@ module main(/*AUTOARG*/
       leds[0] = buttons_db[1];
       leds[1] = buttons_db[2];
    end
-   
+
    // Tie amp control signals
    always_comb begin
       shutdown_b = 1; // Should remain high
       gain       = 1; // 0 is 12DB, 1 is 6DB
    end
 
-   // Map buttons
-   logic channel1_ena, channel2_ena;
-   logic waveform_mode;
-   always_comb begin
-      waveform_mode = buttons_db[0];
-      channel1_ena  = buttons_db[1];
-      channel2_ena  = buttons_db[2];
+   //////////////////////////
+   // Synth Implementation //
+   //////////////////////////
+   enum logic {PLAY=0, DEMO=1} state;
+
+   always_ff @(posedge clk) begin
+      if (rst) begin
+         state <= PLAY;
+      end
+      if (button_demo_db) begin
+         state <= DEMO;
+      end else if (|buttons_db) begin
+         state <= PLAY;
+      end
    end
 
-   // For now, tie each button to a specific pitch. Analog input can be handled
-   // later. Also ties them to sine waves and enabled.
-   logic [11:0] channel1_pitch, channel2_pitch;
-   logic [ 1:0] waveform1, waveform2;
+   // Map buttons and pitches
+   logic [     NUM_CHANNELS-1:0] channel_ena;
+   logic [(NUM_CHANNELS* 2)-1:0] waveforms;
+   logic [(NUM_CHANNELS*12)-1:0] pitches;
+   logic                         button_waveform, button_demo_db;
+
    always_comb begin
-      // A 5th (or the best approximation of one we can make)
-      // pitch1 = 52; // A4, 440Hz
-      // pitch2 = 35; // E5, 659Hz
-
-      // Rufford Park Poachers Simulator Rehearsal B to F
-      channel1_pitch = 178; // C3, Neel Trombone
-      channel2_pitch = 44;  // C5, Devlin Flute
-
-      // Waveforms
-      waveform1 = waveform_type;
-      waveform2 = waveform_type;
-   end // always_comb
+      button_waveform     = buttons_db[0];
+      button_demo_db      = buttons_db[1];
+      case (state)
+        PLAY: begin
+           channel_ena    = buttons[NUM_BUTTONS-1:2];
+           waveforms      = {NUM_CHANNELS{waveform_type}};
+           // Hardcoded for 2 channels
+           pitches[11: 0] = 212; // A4
+           pitches[23:12] = 106; // A5
+        end
+        DEMO: begin
+           channel_ena    = 0; // Have all channels off until memory is works
+           waveforms      = 0;
+           pitches        = -1;
+        end
+      endcase
+   end
 
    // Get waveform type inputted
    logic [1:0] waveform_type;
@@ -69,39 +84,22 @@ module main(/*AUTOARG*/
                               // Inputs
                               .clk             (clk),
                               .rst             (rst),
-                              .ena             (1'b1), 
-                              .waveform_button (waveform_mode));
+                              .ena             (1'b1),
+                              .waveform_button (button_waveform));
 
-   wire [10:0] channel1_out, channel2_out;
-
-   // Instantiate 2 channels
-   channel CHANNEL1 (// Outputs
-                     .out      (channel1_out),
-                     // Inputs
-                     .pitch    (channel1_pitch),
-                     .waveform (waveform1),
-                     .clk      (clk),
-                     .ena      (channel1_ena),
-                     .rst      (rst));
-
-   channel CHANNEL2 (// Outputs
-                     .out      (channel2_out),
-                     // Inputs
-                     .pitch    (channel2_pitch),
-                     .waveform (waveform2),
-                     .clk      (clk),
-                     .ena      (channel2_ena),
-                     .rst      (rst));
-
-   // Sum channels together
+   // Instantiate channel mixer
    wire [11:0] audio;
-   wave_adder WAVE_ADDER (// Outputs
-                          .out      (audio),
-                          // Inputs
-                          .channel1 (channel1_out),
-                          .channel2 (channel2_out));
+   channel_mixer #(.NUM(NUM_CHANNELS), .C(12))
+   CHANNEL_MIXER(// Outputs
+                 .audio       (audio),
+                 // Inputs
+                 .pitches     (pitches),
+                 .channel_ena (channel_ena),
+                 .waveforms   (waveforms),
+                 .clk         (clk),
+                 .rst         (rst));
 
-   // PWM Modulate audio signal
+   // Instantiate PWM generator
    audio_pwm_generator PWM_GENERATOR (.ena              (1'b1),
                                       /*AUTOINST*/
                                       // Outputs
