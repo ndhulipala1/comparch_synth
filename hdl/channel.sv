@@ -4,10 +4,12 @@
 /*
  Channel for synthesizer.
 
- Output frequency is clk/(2*256*(pitch+1)), where clk is 12MHz.
+ Output frequency is
+    clk/(2*(2^M)*(pitch+1))
+ where clk is the clock rate (12MHz).
 
  To find correct `pitch` parameter for frequency:
-    pitch(freq) = (clk/(2*256*freq)) - 1
+    pitch(freq) = (clk/(2*(2^M)*freq)) - 1
 */
 
 module channel (/*AUTOARG*/

@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
-[*] Thu Dec 15 17:38:41 2022
+[*] Fri Dec 16 20:14:08 2022
 [*]
-[dumpfile] "/home/devlin/Documents/Programs/comparch_synth/channel.fst"
-[dumpfile_mtime] "Thu Dec 15 17:37:44 2022"
-[dumpfile_size] 30600
-[savefile] "/home/devlin/Documents/Programs/comparch_synth/tests/test_channel.gtkw"
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/channel.fst"
+[dumpfile_mtime] "Fri Dec 16 20:11:02 2022"
+[dumpfile_size] 15202
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_channel.gtkw"
 [timestart] 0
 [size] 1884 980
-[pos] 1899 -1
-*-26.900000 12990 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 944 0
+*-28.400000 12990 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test_channel.
 [treeopen] test_channel.UUT.
 [sst_width] 273
@@ -23,25 +23,27 @@ test_channel.UUT.clk
 test_channel.UUT.ena
 test_channel.UUT.rst
 @22
-test_channel.UUT.pitch[11:0]
+test_channel.UUT.pitch[13:0]
 @28
+[color] 1
 test_channel.UUT.waveform[1:0]
 @200
 -Outputs
-@8022
-test_channel.UUT.out[10:0]
-@200
--Internal
-@24
-test_channel.UUT.period[7:0]
 @28
 test_channel.UUT.clk_div
-@29
 test_channel.UUT.clk_div_pulse
 @8022
-test_channel.UUT.saw[10:0]
-test_channel.UUT.sine[10:0]
-test_channel.UUT.square[10:0]
-test_channel.UUT.triangle[10:0]
+test_channel.UUT.period[5:0]
+[color] 1
+test_channel.UUT.square[9:0]
+[color] 1
+test_channel.UUT.triangle[9:0]
+[color] 1
+test_channel.UUT.saw[9:0]
+@200
+-Internal
+@8022
+[color] 1
+test_channel.UUT.out[9:0]
 [pattern_trace] 1
 [pattern_trace] 0
