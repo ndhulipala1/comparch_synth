@@ -7,6 +7,7 @@ VIVADO=vivado -mode batch -source
 
 # Source files for large module tests
 CHANNEL_SRCS=hdl/channel.sv hdl/sq_wave_generator.sv hdl/tri_wave_generator.sv hdl/sine_wave_generator.sv hdl/saw_wave_generator.sv hdl/clock_divider.sv hdl/monostable.sv
+CHANNEL_MIXER_SRCS=${CHANNEL_SRCS} hdl/wave_adder.sv hdl/channel_mixer.sv
 CONTROLLER_SRCS=hdl/audio_controller.sv hdl/i2c_controller.sv hdl/wave_adder.sv
 
 
@@ -62,6 +63,11 @@ test_wave_adder: tests/test_wave_adder.sv hdl/wave_adder.sv
 	${IVERILOG} $^ -o test_wave_adder.bin && ${VVP} test_wave_adder.bin ${VVP_POST}
 waves_wave_adder: test_wave_adder
 	gtkwave wave_adder.fst -a tests/test_wave_adder.gtkw
+
+test_channel_mixer: tests/test_channel_mixer.sv ${CHANNEL_MIXER_SRCS}
+	${IVERILOG} $^ -o test_channel_mixer.bin && ${VVP} test_channel_mixer.bin ${VVP_POST}
+waves_channel_mixer: test_channel_mixer
+	gtkwave channel_mixer.fst -a tests/test_channel_mixer.gtkw
 
 
 test_audio_pwm_generator: tests/test_audio_pwm_generator.sv hdl/wave_adder.sv hdl/audio_pwm_generator.sv hdl/sine_wave_generator.sv

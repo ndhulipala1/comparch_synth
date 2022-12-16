@@ -1,0 +1,52 @@
+[*]
+[*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
+[*] Fri Dec 16 20:54:46 2022
+[*]
+[dumpfile] "/Documents/Documents/Programs/comparch_synth/channel_mixer.fst"
+[dumpfile_mtime] "Fri Dec 16 20:53:37 2022"
+[dumpfile_size] 52793
+[savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_channel_mixer.gtkw"
+[timestart] 0
+[size] 1884 980
+[pos] -1 -1
+*-29.386400 584000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_channel_mixer.
+[treeopen] test_channel_mixer.UUT.
+[treeopen] test_channel_mixer.UUT.genblk1[0].
+[treeopen] test_channel_mixer.UUT.genblk1[1].
+[treeopen] test_channel_mixer.UUT.genblk1[2].
+[treeopen] test_channel_mixer.UUT.genblk1[3].
+[sst_width] 273
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@200
+-Inputs
+@28
+test_channel_mixer.UUT.rst
+test_channel_mixer.UUT.clk
+@22
+test_channel_mixer.UUT.pitches[55:0]
+@28
+test_channel_mixer.UUT.channel_ena[3:0]
+test_channel_mixer.UUT.waveforms[7:0]
+@200
+-Output
+@8023
+[color] 2
+test_channel_mixer.UUT.audio[11:0]
+@200
+-Internal
+@8022
+[color] 2
++{CH0} test_channel_mixer.UUT.genblk1[0].CHANNEL.out[9:0]
+[color] 2
++{CH1} test_channel_mixer.UUT.genblk1[1].CHANNEL.out[9:0]
+[color] 2
++{CH2} test_channel_mixer.UUT.genblk1[2].CHANNEL.out[9:0]
+[color] 2
++{CH3} test_channel_mixer.UUT.genblk1[3].CHANNEL.out[9:0]
+@22
+test_channel_mixer.UUT.channels[39:0]
+[pattern_trace] 1
+[pattern_trace] 0
