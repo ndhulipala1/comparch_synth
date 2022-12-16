@@ -14,7 +14,7 @@ module channel_mixer (/*AUTOARG*/
 
    parameter NUM = 4;  // Number of channels to use
    parameter M   = 6;  // Size of period in bits
-   parameter C   = 14; // Size of pitch input in bits
+   parameter C   = 12; // Size of pitch input in bits
    parameter N   =  $clog2(4095/NUM); // Channel output size in bits
 
 
