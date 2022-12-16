@@ -16,7 +16,7 @@ monostable MONO (.clk(clk), .rst(rst), .button(waveform_button), .out(waveform_d
 enum logic [1:0] {
     S_SQUARE,
     S_TRIANGLE,
-    S_SINE,
+    // S_SINE,
     S_SAWTOOTH
 } state;
 always_ff @(posedge clk) begin : waveform_fsm
@@ -25,8 +25,8 @@ always_ff @(posedge clk) begin : waveform_fsm
     end else if (ena) begin
         case (state)
         S_SQUARE: if (waveform_db_and_mono) state <= S_TRIANGLE;
-        S_TRIANGLE: if (waveform_db_and_mono) state <= S_SINE;
-        S_SINE: if (waveform_db_and_mono) state <= S_SAWTOOTH;
+        S_TRIANGLE: if (waveform_db_and_mono) state <= S_SAWTOOTH;
+        // S_SINE: if (waveform_db_and_mono) state <= S_SAWTOOTH;
         S_SAWTOOTH: if (waveform_db_and_mono) state <= S_SQUARE;
         endcase
     end
@@ -35,8 +35,8 @@ always_comb begin : state_defs
     case (state)
         S_SQUARE: waveform_out = 2'b00;
         S_TRIANGLE: waveform_out = 2'b01;
-        S_SINE: waveform_out = 2'b10;
-        S_SAWTOOTH: waveform_out = 2'b11;
+        // S_SINE: waveform_out = 2'b10;
+        S_SAWTOOTH: waveform_out = 2'b10;
     endcase
 end
 

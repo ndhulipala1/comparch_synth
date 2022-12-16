@@ -7,8 +7,13 @@ module sq_wave_generator(/*AUTOARG*/
    // Inputs
    period
    );
-   input  wire  [ 7:0] period;
-   output logic [10:0] square;
+   // Number of pins on input
+   parameter M = 6;
+   // Number of pins on output
+   parameter N = 11;
 
-   always_comb square = (period[7]) ? -1 : 11'b0;
+   input  wire  [M-1:0] period;
+   output logic [N-1:0] square;
+
+   always_comb square = (period[M-1]) ? -1 : 0;
 endmodule

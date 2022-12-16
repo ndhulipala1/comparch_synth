@@ -7,11 +7,15 @@ module tri_wave_generator(/*AUTOARG*/
    // Inputs
    period
    );
-   input  wire  [ 7:0] period;
-   output logic [10:0] triangle;
+   // Number of bits on the input
+   parameter M = 6;
+   // Number of bits on the output
+   parameter N = 11;
+   input  wire  [M-1:0] period;
+   output logic [N-1:0] triangle;
 
    always_comb begin
-      triangle = period[7] ? {~period[6:0], ~{4{period[0]}}}
-                           : { period[6:0],  {4{period[0]}}};
+      triangle = period[M-1] ? {~period[M-2:0], ~{(N-M+1){period[0]}}}
+                             : { period[M-2:0],  {(N-M+1){period[0]}}};
    end
 endmodule

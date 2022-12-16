@@ -7,9 +7,15 @@ module saw_wave_generator(/*AUTOARG*/
    // Inputs
    period
    );
-   input  wire  [ 7:0] period;
-   output logic [10:0] saw;
+   // Number of bits on the input
+   parameter M = 6;
+   // Number of bits on the output
+   // Must be greater than size of input
+   parameter N = 11;
+   
+   input  wire  [M-1:0] period;
+   output logic [N-1:0] saw;
 
-   always_comb saw = {period, {3{period[0]}}};
+   always_comb saw = {period, {(N-M){period[0]}}};
 
 endmodule

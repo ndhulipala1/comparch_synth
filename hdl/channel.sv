@@ -16,18 +16,25 @@ module channel (/*AUTOARG*/
    // Inputs
    clk, ena, pitch, rst, waveform
    );
-   output logic [10:0] out; // 11 bit output as DAC is 12 bits.
+   // Size of period in bits
+   parameter M = 6;
+   // Size of waveform signals in bits (affects size of output audio signal)
+   parameter N = 11;
+   // Size of pitch in bits (affects clock divider parameters)
+   parameter C = 12;
 
-   input wire [11:0] pitch;
-   input wire [1:0]  waveform;
-   input wire        clk, ena, rst;
+   output logic [N-1:0] out; // 11 bit output as DAC is 12 bits.
+
+   input wire [C-1:0] pitch;
+   input wire [1:0]   waveform;
+   input wire         clk, ena, rst;
 
    // Internal counters
-   logic [7:0] period; // 8bit counter to send to wave generators, the period
-                       // of the wave goes from 0 to 255
+   logic [M-1:0] period; // 8bit counter to send to wave generators, the period
+                         // of the wave goes from 0 to 255
 
    wire         clk_div;
-   clock_divider #(.N(12)) CLK_DIVIDER (// Outputs
+   clock_divider #(.N(C)) CLK_DIVIDER (// Outputs
                                         .clk_divided (clk_div),
                                         // Inputs
                                         .clk         (clk),
@@ -52,28 +59,29 @@ module channel (/*AUTOARG*/
    end
 
    // Signals for each waveform
-   wire [10:0] square, triangle, sine, saw;
+   wire [N-1:0] square, triangle, sine, saw;
 
-   sq_wave_generator SQ_WAVE (/*AUTOINST*/
-                              // Outputs
-                              .square           (square[10:0]),
-                              // Inputs
-                              .period           (period[7:0]));
-   tri_wave_generator TRI_WAVE (/*AUTOINST*/
-                                // Outputs
-                                .triangle       (triangle[10:0]),
-                                // Inputs
-                                .period         (period[7:0]));
-   sine_wave_generator SINE_WAVE (/*AUTOINST*/
-                                  // Outputs
-                                  .sine                 (sine[10:0]),
-                                  // Inputs
-                                  .period               (period[7:0]));
-   saw_wave_generator SAW_WAVE (/*AUTOINST*/
-                                // Outputs
-                                .saw            (saw[10:0]),
-                                // Inputs
-                                .period         (period[7:0]));
+   sq_wave_generator #(.M(M),.N(N)) SQ_WAVE (/*AUTOINST*/
+                                             // Outputs
+                                             .square           (square[N-1:0]),
+                                             // Inputs
+                                             .period           (period[M-1:0]));
+   tri_wave_generator #(.M(M), .N(N)) TRI_WAVE (/*AUTOINST*/
+                                                // Outputs
+                                                .triangle       (triangle[N-1:0]),
+                                                // Inputs
+                                                .period         (period[M-1:0]));
+   // sine_wave_generator non-parametrizable
+   // sine_wave_generator SINE_WAVE (/*AUTOINST*/
+   //                                // Outputs
+   //                                .sine                 (sine[10:0]),
+   //                                // Inputs
+   //                                .period               (period[M-1:0]));
+   saw_wave_generator #(.M(M), .N(N)) SAW_WAVE (/*AUTOINST*/
+                                                // Outputs
+                                                .saw            (saw[N-1:0]),
+                                                // InMuts
+                                                .period         (period[M-1:0]));
 
    // Select which waveform signal to use
    always_comb begin
@@ -84,8 +92,8 @@ module channel (/*AUTOARG*/
          case (waveform)
            2'b00 : out = square;
            2'b01 : out = triangle;
-           2'b10 : out = sine;
-           2'b11 : out = saw;
+         //   2'b10 : out = sine;
+           2'b10 : out = saw;
          endcase
       end
    end
