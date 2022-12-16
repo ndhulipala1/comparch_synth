@@ -94,8 +94,8 @@ module channel (/*AUTOARG*/
          case (waveform)
            2'b00  : out = square;
            2'b01  : out = triangle;
-           // 2'b10 : out = sine;
            2'b10  : out = saw;
+           // 2'b11 : out = sine;
            default: out = square;
          endcase
       end

@@ -69,10 +69,8 @@ module test_channel;
       waveform = 1;
       repeat (NOTE_CYCLES) @(posedge clk);
 
-      // Right now 2 is undefined
-
       // saw
-      waveform = 3;
+      waveform = 2;
       repeat (NOTE_CYCLES) @(posedge clk);
 
       // Test with A880
@@ -85,10 +83,8 @@ module test_channel;
       waveform = 1;
       repeat (NOTE_CYCLES) @(posedge clk);
 
-      // Right now 2 is undefined
-
       // saw
-      waveform = 3;
+      waveform = 2;
       repeat (NOTE_CYCLES) @(posedge clk);
 
       $finish;

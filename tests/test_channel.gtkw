@@ -1,14 +1,14 @@
 [*]
 [*] GTKWave Analyzer v3.3.113 (w)1999-2022 BSI
-[*] Fri Dec 16 20:14:08 2022
+[*] Fri Dec 16 20:27:46 2022
 [*]
 [dumpfile] "/Documents/Documents/Programs/comparch_synth/channel.fst"
-[dumpfile_mtime] "Fri Dec 16 20:11:02 2022"
-[dumpfile_size] 15202
+[dumpfile_mtime] "Fri Dec 16 20:27:35 2022"
+[dumpfile_size] 15402
 [savefile] "/Documents/Documents/Programs/comparch_synth/tests/test_channel.gtkw"
 [timestart] 0
 [size] 1884 980
-[pos] 944 0
+[pos] -11 0
 *-28.400000 12990 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test_channel.
 [treeopen] test_channel.UUT.
