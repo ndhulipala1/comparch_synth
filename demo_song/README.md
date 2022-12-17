@@ -17,11 +17,11 @@ of the song. The width is 96.
 The 80 bits is broken into 6 16-bit messages (1 per voice). They look like
 this:
 
-| Bits     | Purpose                                               |
-|----------|-------------------------------------------------------|
-| `[1:0]`  | Waveform                                              |
-| `[3:2]`  | Volume/number of channels to play with, if 5+ use all |
-| `[15:4]` | Pitch signal                                          |
+| Bits     | Purpose                                |
+|----------|----------------------------------------|
+| `[1:0]`  | Waveform                               |
+| `[3:2]`  | Volume/number of channels to play with |
+| `[15:4]` | Pitch signal                           |
 
 ## Music file format
 

@@ -7,8 +7,16 @@ module main(/*AUTOARG*/
    // Inputs
    buttons, clk, rst
    );
-   parameter NUM_CHANNELS = 2;
-   parameter NUM_BUTTONS  = NUM_CHANNELS + 2; // waveform select, demo
+   parameter NUM_CHANNELS = 25;
+   parameter NUM_BUTTONS = 4;
+   // parameter NUM_BUTTONS  = NUM_CHANNELS + 2; // waveform select, demo
+
+   // Demo song
+
+   // Demo 1
+   parameter DEMO_SONG = "demo_song/demo1.memh";
+   parameter DEMO_SONG_LENGTH = 128;
+   parameter DEMO_SONG_ADDR_SIZE = $clog2(DEMO_SONG_LENGTH);
 
    input wire clk, rst;
 
@@ -26,8 +34,8 @@ module main(/*AUTOARG*/
 
    // Debug LEDs
    always_comb begin
-      leds[0] = channel_ena[0];
-      leds[1] = channel_ena[1];
+      leds[0] = state;
+      leds[1] = 0;
    end
 
    // Tie amp control signals
@@ -63,16 +71,22 @@ module main(/*AUTOARG*/
       button_demo_db      = buttons_db[1];
       case (state)
         PLAY: begin
-           channel_ena    = buttons[NUM_BUTTONS-1:2];
+           // Temp solution for not having enough buttons
+           channel_ena [1:0] = buttons[NUM_BUTTONS-1:2];
+           channel_ena [NUM_CHANNELS-1:2] = 0;
+
+           // channel_ena    = buttons[NUM_BUTTONS-1:2];
            waveforms      = {NUM_CHANNELS{waveform_type}};
            // Hardcoded for 2 channels
            pitches[11: 0] = 212; // A4
            pitches[23:12] = 106; // A5
+           demo_ena       = 0;
         end
         DEMO: begin
-           channel_ena    = 0; // Have all channels off until memory is works
-           waveforms      = 0;
-           pitches        = -1;
+           channel_ena    = demo_channel_ena;
+           waveforms      = demo_waveforms;
+           pitches        = demo_pitches;
+           demo_ena       = 1;
         end
       endcase
    end
@@ -108,5 +122,32 @@ module main(/*AUTOARG*/
                                       .audio            (audio[11:0]),
                                       .clk              (clk),
                                       .rst              (rst));
+
+   // Load demo song into memory
+   wire [95:0] demo_data;
+   wire [DEMO_SONG_ADDR_SIZE-1:0] demo_addr;
+
+   block_rom #(.W(96), .L(DEMO_SONG_LENGTH), .INIT(DEMO_SONG))
+   DEMO_ROM (// Outputs
+             .data (demo_data),
+             // Inputs
+             .clk  (clk),
+             .addr (demo_addr));
+
+
+   wire  [     NUM_CHANNELS-1:0] demo_channel_ena;
+   wire  [(NUM_CHANNELS* 2)-1:0] demo_waveforms;
+   wire  [(NUM_CHANNELS*12)-1:0] demo_pitches;
+   logic                         demo_ena;
+   demo_decoder DEMO_DECODER (// Outputs
+                              .demo_addr        (demo_addr),
+                              .demo_pitches     (demo_pitches),
+                              .demo_channel_ena (demo_channel_ena),
+                              .demo_waveforms   (demo_waveforms),
+                              // Inputs
+                              .demo_data        (demo_data),
+                              .clk              (clk),
+                              .rst              (rst),
+                              .ena              (demo_ena));
 
 endmodule
