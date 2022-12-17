@@ -26,8 +26,8 @@ module main(/*AUTOARG*/
 
    // Debug LEDs
    always_comb begin
-      leds[0] = buttons_db[1];
-      leds[1] = buttons_db[2];
+      leds[0] = channel_ena[0];
+      leds[1] = channel_ena[1];
    end
 
    // Tie amp control signals
