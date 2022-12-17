@@ -42,7 +42,9 @@ These commands change the state of the internal model in Python land.
   mapping. `value` is a pitch from (RANGE). Sharps are indicated with an `s` or
   a `#` after the letter and flats a `b`. Valid values include `A4`, `Cs4`,
   `Eb4`, etc.
-- `vol` `voice` `value`: Sets the volume ov `voice` to `value`.
+- `notes` `*values`: Sets the pitch of up to 6 voices from a dictionary
+  mapping.
+- `vol` `voice` `value`: Sets the volume of `voice` to `value`.
 - `measure` `subs`: Sets a measure to be `subs` subdivisions.
 
 The initial state is assumed a measure is 16 subdivisions, and all voices are
