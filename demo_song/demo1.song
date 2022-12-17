@@ -24,6 +24,14 @@ vol  3 3
 
 m 1
 
+# Lower volume so it doesn't clip
+vol 0 2
+vol 1 2
+vol 2 2
+vol 3 2
+vol 4 2
+vol 5 2
+
 wave 4 0
 note 4 E5
 vol  4 3
@@ -37,9 +45,9 @@ vol  5 3
 m 1
 
 # Decay audio
-vol 0 2
-vol 1 2
-vol 2 2
+vol 0 1
+vol 1 1
+vol 2 1
 vol 3 2
 vol 4 2
 vol 5 2
