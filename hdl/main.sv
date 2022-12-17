@@ -13,12 +13,20 @@ module main(/*AUTOARG*/
 
    // Demo song
    // To get divider
-   // divide = (12000000*60)/(bpm*sub) - 1
-   // Demo 1
-   parameter DEMO_SONG = "demo_song/demo1.memh";
-   parameter DEMO_SONG_LENGTH = 128;
+   // divide = (12000000*60)/(bpm*sub*2) - 1
 
-   parameter DEMO_SONG_CLK_DIVIDE = 1499999; // 120bpm, sub of 4 (16th notes)
+   // Demo 1
+   // parameter DEMO_SONG = "demo_song/demo1.memh";
+   // parameter DEMO_SONG_LENGTH = 128;
+
+   // parameter DEMO_SONG_CLK_DIVIDE = 1499999; // 120bpm, sub of 4 (16th notes)
+   // parameter DEMO_SONG_ADDR_SIZE = $clog2(DEMO_SONG_LENGTH);
+
+   // Demo 2
+   parameter DEMO_SONG = "demo_song/demo2.memh";
+   parameter DEMO_SONG_LENGTH = 288;
+
+   parameter DEMO_SONG_CLK_DIVIDE = 749999; // 120bpm, sub of 4 (16th notes)
    parameter DEMO_SONG_ADDR_SIZE = $clog2(DEMO_SONG_LENGTH);
 
    input wire clk, rst;
