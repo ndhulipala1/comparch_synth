@@ -5,9 +5,9 @@ demo song.
 
 ## Note about the synth hardware
 
-The demo splits the 25 channels into 5 groups of 5. These 5 groups can each
+The demo splits the 25 channels into 6 groups of 4. These 6 groups can each
 play their own pitch, waveform, and dynamic (how many channels are enabled).
-These groups of 5 are called voices.
+These groups of 4 are called voices. The remaining channel plays nothing.
 
 ## Block ROM format
 
