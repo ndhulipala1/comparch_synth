@@ -12,10 +12,13 @@ module main(/*AUTOARG*/
    // parameter NUM_BUTTONS  = NUM_CHANNELS + 2; // waveform select, demo
 
    // Demo song
-
+   // To get divider
+   // divide = (12000000*60)/(bpm*sub) - 1
    // Demo 1
    parameter DEMO_SONG = "demo_song/demo1.memh";
    parameter DEMO_SONG_LENGTH = 128;
+
+   parameter DEMO_SONG_CLK_DIVIDE = 1499999; // 120bpm, sub of 4 (16th notes)
    parameter DEMO_SONG_ADDR_SIZE = $clog2(DEMO_SONG_LENGTH);
 
    input wire clk, rst;
@@ -139,15 +142,17 @@ module main(/*AUTOARG*/
    wire  [(NUM_CHANNELS* 2)-1:0] demo_waveforms;
    wire  [(NUM_CHANNELS*12)-1:0] demo_pitches;
    logic                         demo_ena;
-   demo_decoder DEMO_DECODER (// Outputs
-                              .demo_addr        (demo_addr),
-                              .demo_pitches     (demo_pitches),
-                              .demo_channel_ena (demo_channel_ena),
-                              .demo_waveforms   (demo_waveforms),
-                              // Inputs
-                              .demo_data        (demo_data),
-                              .clk              (clk),
-                              .rst              (rst),
-                              .ena              (demo_ena));
+   demo_decoder #(.DEMO_SONG_LENGTH(DEMO_SONG_LENGTH),
+                  .DEMO_CLK_DIVIDE (DEMO_SONG_CLK_DIVIDE))
+   DEMO_DECODER (// Outputs
+                 .demo_addr        (demo_addr),
+                 .demo_pitches     (demo_pitches),
+                 .demo_channel_ena (demo_channel_ena),
+                 .demo_waveforms   (demo_waveforms),
+                 // Inputs
+                 .demo_data        (demo_data),
+                 .clk              (clk),
+                 .rst              (rst),
+                 .ena              (demo_ena));
 
 endmodule

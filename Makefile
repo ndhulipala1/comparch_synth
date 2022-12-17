@@ -12,7 +12,7 @@ CONTROLLER_SRCS=hdl/audio_controller.sv hdl/i2c_controller.sv hdl/wave_adder.sv
 
 
 # Add any new source files needed for the final bitstream here
-MAIN_SRCS=hdl/main.sv ${CHANNEL_SRCS} hdl/wave_adder.sv hdl/audio_pwm_generator.sv
+MAIN_SRCS=hdl/main.sv ${CHANNEL_SRCS} hdl/wave_adder.sv hdl/audio_pwm_generator.sv hdl/demo_decoder.sv hdl/block_rom.sv demo_song/demo1.memh
 
 # Look up .PHONY rules for Makefiles
 .PHONY: clean submission

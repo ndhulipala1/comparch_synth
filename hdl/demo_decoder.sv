@@ -21,18 +21,19 @@ module demo_decoder(/*AUTOARG*/
    output logic [    NUM-1:0] demo_channel_ena;
    output logic [(NUM*2)-1:0] demo_waveforms;
    input  wire  [95       :0] demo_data;
-   input                      clk, rst, ena;
+   input  wire                clk, rst, ena;
 
    // Demo counter
    output logic [$clog2(DEMO_SONG_LENGTH)-1:0] demo_addr;
    wire clk_divided;
    wire clk_divided_pulse;
-   clock_divider DEMO_DIVIDER (// Outputs
-                               .clk_divided (clk_divided),
-                               // Inputs
-                               .clk         (clk),
-                               .rst         (rst),
-                               .divide      (DEMO_CLK_DIVIDE));
+   clock_divider #(.N($clog2(DEMO_CLK_DIVIDE)))
+   DEMO_DIVIDER (// Outputs
+                 .clk_divided (clk_divided),
+                 // Inputs
+                 .clk         (clk),
+                 .rst         (rst),
+                 .divide      (DEMO_CLK_DIVIDE));
    monostable DEMO_MONOSTABLE (// Outputs
                                .out    (clk_divided_pulse),
                                // Inputs

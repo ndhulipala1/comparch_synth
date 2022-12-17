@@ -34,6 +34,8 @@ wave 5 0
 note 5 G5
 vol  5 3
 
+m 1
+
 # Decay audio
 vol 0 2
 vol 1 2
