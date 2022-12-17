@@ -12,9 +12,10 @@ These groups of 4 are called voices. The remaining channel plays nothing.
 ## Block ROM format
 
 Each address in the memh represents the state of the channels for 1 subdivision
-of the song. The width is 80 bits long.
+of the song. The width is 96.
 
-The 80 bits is broken into 5 16-bit messages. They look like this:
+The 80 bits is broken into 6 16-bit messages (1 per voice). They look like
+this:
 
 | Bits     | Purpose                                               |
 |----------|-------------------------------------------------------|
@@ -35,12 +36,13 @@ Each line of the file represents a command. Lines starting with `#`, `;`, or
 These commands change the state of the internal model in Python land.
 
 - `wave` `voice` `waveform`: Sets the waveform of `voice` to `waveform`.
-- `pitch` `voice` `value`: Sets the pitch of `voice` to `value` (a frequency).
+- `freq` `voice` `value`: Sets the pitch of `voice` to `value` (a frequency).
   Only useful for micro tones.
 - `note` `voice` `value`: Sets the pitch of `voice` to a dictionary
   mapping. `value` is a pitch from (RANGE). Sharps are indicated with an `s` or
   a `#` after the letter and flats a `b`. Valid values include `A4`, `Cs4`,
   `Eb4`, etc.
+- `vol` `voice` `value`: Sets the volume ov `voice` to `value`.
 - `measure` `subs`: Sets a measure to be `subs` subdivisions.
 
 The initial state is assumed a measure is 16 subdivisions, and all voices are
