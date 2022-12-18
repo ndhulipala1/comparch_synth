@@ -45,6 +45,7 @@ These commands change the state of the internal model in Python land.
 - `notes` `*values`: Sets the pitch of up to 6 voices from a dictionary
   mapping.
 - `vol` `voice` `value`: Sets the volume of `voice` to `value`.
+- `vols` `*voices`: Sets the volume of up to 6 voices.
 - `measure` `subs`: Sets a measure to be `subs` subdivisions.
 
 The initial state is assumed a measure is 16 subdivisions, and all voices are

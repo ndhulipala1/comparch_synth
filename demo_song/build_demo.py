@@ -76,6 +76,9 @@ class SongParser:
                     self.voices[int(i)]["freq"] = note
             case ["vol", voice, value]:
                 self.voices[int(voice)]["volume"] = int(value)
+            case ["vols", *voices]:
+                for i in range(len(voices)):
+                    self.voices[int(i)]["volume"] = int(voices[i])
             case ["measure", subs]:
                 self.measure = int(subs)
             # Write State
