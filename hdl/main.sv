@@ -23,10 +23,17 @@ module main(/*AUTOARG*/
    // parameter DEMO_SONG_ADDR_SIZE = $clog2(DEMO_SONG_LENGTH);
 
    // Demo 2
-   parameter DEMO_SONG = "demo_song/demo2.memh";
-   parameter DEMO_SONG_LENGTH = 288;
+   // parameter DEMO_SONG = "demo_song/demo2.memh";
+   // parameter DEMO_SONG_LENGTH = 640;
 
-   parameter DEMO_SONG_CLK_DIVIDE = 749999; // 120bpm, sub of 4 (16th notes)
+   // parameter DEMO_SONG_CLK_DIVIDE = 749999; // 120bpm, sub of 4 (16th notes)
+   // parameter DEMO_SONG_ADDR_SIZE = $clog2(DEMO_SONG_LENGTH);
+
+   // Demo 3
+   parameter DEMO_SONG = "demo_song/demo3.memh";
+   parameter DEMO_SONG_LENGTH = 1536;
+
+   parameter DEMO_SONG_CLK_DIVIDE = 149999; // 200bpm, sub of 12
    parameter DEMO_SONG_ADDR_SIZE = $clog2(DEMO_SONG_LENGTH);
 
    input wire clk, rst;
