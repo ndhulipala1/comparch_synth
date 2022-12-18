@@ -45,7 +45,7 @@ module demo_decoder(/*AUTOARG*/
          demo_addr <= 0;
       end
       if (clk_divided_pulse) begin
-         if (demo_addr == DEMO_SONG_LENGTH) begin
+         if (demo_addr == DEMO_SONG_LENGTH-1) begin
             demo_addr <= 0;
          end else begin
             demo_addr <= ena ? demo_addr + 1 : 0;
