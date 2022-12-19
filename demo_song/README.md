@@ -14,7 +14,7 @@ These groups of 4 are called voices. The remaining channel plays nothing.
 Each address in the memh represents the state of the channels for 1 subdivision
 of the song. The width is 96.
 
-The 80 bits is broken into 6 16-bit messages (1 per voice). They look like
+The 96 bits is broken into 6 16-bit messages (1 per voice). They look like
 this:
 
 | Bits     | Purpose                                |
@@ -53,7 +53,7 @@ playing A4 (`A4`) square waves (`0`) at 0 volume (`0`).
 
 ### Write State Commands
 
-These commands write the current state into an 80-bit line.
+These commands write the current state into an 96-bit line.
 
 - `s` `num`: Writes `num` subdivisions of the current state.
 - `m` `num`: Writes `m` measures of the current state.
